@@ -22,8 +22,8 @@ def main():
 
             client = mqtt.Client()
             client.connect("192.168.1.100",1883,60)
-            client.publish("garden", readings);
-            client.disconnect();
+            client.publish("garden", str(readings))
+            client.disconnect()
 
             time.sleep(10)
 
