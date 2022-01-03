@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-Garden automation, reading bmes.
+Garden automation, reading sensors.
 """
 
 import bme680
