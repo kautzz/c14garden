@@ -21,14 +21,13 @@ def setup_bme():
 def read_bme():
     print('reading bme data')
     if bme.get_sensor_data():
-        if bme.data.heat_stable:
-            print('heat stable!')
-
+        
         #output = "{0:.2f} C, {1:.2f} hPa, {2:.2f} %RH, {3:.2f} ohm".format(bme.data.temperature, bme.data.pressure, bme.data.humidity, bme.data.gas_resistance)
         readings = {
             "temperature": bme.data.temperature,
             "humidity": bme.data.humidity,
             "pressure": bme.data.pressure,
-            "gas_resistance": bme.data.gas_resistance
+            "gas_resistance": bme.data.gas_resistance,
+            "heat_stable": bme.data.heat_stable
         }
         return(readings)
