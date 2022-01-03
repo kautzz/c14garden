@@ -6,7 +6,6 @@ Garden automation, reading bmes.
 
 import bme680
 bme = bme680.BME680()
-bmeSetup = False
 
 def setup_bme():
     print('setting up bme')
@@ -18,17 +17,12 @@ def setup_bme():
     bme.set_gas_heater_temperature(320)
     bme.set_gas_heater_duration(150)
     bme.select_gas_heater_profile(0)
-    bmeSetup = True
 
 def read_bme():
-    if bmeSetup == False:
-        setup_bme()
-
     print('reading bme data')
-
     if bme.get_sensor_data():
         if bme.data.heat_stable:
             print('heat stable!')
 
-        output = "{0:.2f} C,{1:.2f} hPa,{2:.2f} %RH,{3:.2f} OHM".format(bme.data.temperature, bme.data.pressure, bme.data.humidity, bme.data.gas_resistance)
+        output = "{0:.2f} C, {1:.2f} hPa, {2:.2f} %RH, {3:.2f} ohm".format(bme.data.temperature, bme.data.pressure, bme.data.humidity, bme.data.gas_resistance)
         return(output)

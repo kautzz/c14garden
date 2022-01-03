@@ -7,8 +7,11 @@ Garden automation, main application.
 import sensors
 import time
 
+def setup_hardware():
+    setup_bme()
 
 def main():
+    setup_hardware()
     try:
         while True:
             print('running main')
