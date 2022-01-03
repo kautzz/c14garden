@@ -26,7 +26,7 @@ def read_bme():
 
     print('reading bme data')
 
-    if bme.get_bme_data():
+    if bme.get_sensor_data():
         if bme.data.heat_stable:
             print('heat stable!')
 
