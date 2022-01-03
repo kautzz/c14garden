@@ -1,33 +1,34 @@
-"""
-Garden automation, reading sensors.
-"""
-import bme680
-import time
+#!/usr/bin/env python
 
-sensor = bme680.BME680()
+"""
+Garden automation, reading bmes.
+"""
+
+import bme680
+bme = bme680.BME680()
+bmeSetup = False
 
 def setup_bme():
-    print('setting up sensor')
-    sensor.set_humidity_oversample(bme680.OS_2X)
-    sensor.set_pressure_oversample(bme680.OS_4X)
-    sensor.set_temperature_oversample(bme680.OS_8X)
-    sensor.set_filter(bme680.FILTER_SIZE_3)
-    sensor.set_gas_status(bme680.ENABLE_GAS_MEAS)
-    sensor.set_gas_heater_temperature(320)
-    sensor.set_gas_heater_duration(150)
-    sensor.select_gas_heater_profile(0)
+    print('setting up bme')
+    bme.set_humidity_oversample(bme680.OS_2X)
+    bme.set_pressure_oversample(bme680.OS_4X)
+    bme.set_temperature_oversample(bme680.OS_8X)
+    bme.set_filter(bme680.FILTER_SIZE_3)
+    bme.set_gas_status(bme680.ENABLE_GAS_MEAS)
+    bme.set_gas_heater_temperature(320)
+    bme.set_gas_heater_duration(150)
+    bme.select_gas_heater_profile(0)
+    bmeSetup = True
 
 def read_bme():
-    print('reading sensor data')
+    if bmeSetup == False:
+        setup_bme()
 
-    while True:
-        if sensor.get_sensor_data():
-            output = "{0:.2f} C,{1:.2f} hPa,{2:.2f} %RH".format(sensor.data.temperature, sensor.data.pressure, sensor.data.humidity)
+    print('reading bme data')
 
-            if sensor.data.heat_stable:
-                print("{0},{1} Ohms".format(output, sensor.data.gas_resistance))
+        if bme.get_bme_data():
+            if bme.data.heat_stable:
+                print('heat stable!')
 
-            else:
-                print(output)
-
-    time.sleep(1)
+            output = "{0:.2f} C,{1:.2f} hPa,{2:.2f} %RH,{3:.2f} OHM".format(bme.data.temperature, bme.data.pressure, bme.data.humidity, bme.data.gas_resistance)
+            return(output)
