@@ -8,8 +8,9 @@ from time import sleep
 
 valve1 = LED(18)
 
-while True:
-    led.on()
-    sleep(5)
-    led.off()
-    sleep(5)
+def set():
+    while True:
+        led.on()
+        sleep(5)
+        led.off()
+        sleep(5)

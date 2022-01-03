@@ -5,6 +5,7 @@ Garden automation, main application.
 """
 
 import sensors
+import actuators
 import time
 import paho.mqtt.client as mqtt
 
@@ -25,6 +26,8 @@ def main():
                 client.connect("192.168.1.100",1883,60)
                 client.publish("growbed1/sensors", str(readings))
                 client.disconnect()
+
+            actuators.set()
 
             time.sleep(10)
 
