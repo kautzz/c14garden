@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """
 Garden automation, main application.
@@ -6,6 +6,8 @@ Garden automation, main application.
 
 import sensors
 import time
+import paho.mqtt.client as mqtt
+
 
 def setup_hardware():
     sensors.setup_bme()
@@ -17,6 +19,12 @@ def main():
             print('running main')
             readings = sensors.read_bme()
             print(readings)
+
+            client = mqtt.Client()
+            client.connect("192.168.1.100",1883,60)
+            client.publish("garden", readings);
+            client.disconnect();
+
             time.sleep(10)
 
     except KeyboardInterrupt:

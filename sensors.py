@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """
 Garden automation, reading bmes.
@@ -21,7 +21,7 @@ def setup_bme():
 def read_bme():
     print('reading bme data')
     if bme.get_sensor_data():
-        
+
         #output = "{0:.2f} C, {1:.2f} hPa, {2:.2f} %RH, {3:.2f} ohm".format(bme.data.temperature, bme.data.pressure, bme.data.humidity, bme.data.gas_resistance)
         readings = {
             "temperature": bme.data.temperature,
