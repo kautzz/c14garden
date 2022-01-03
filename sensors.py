@@ -24,5 +24,11 @@ def read_bme():
         if bme.data.heat_stable:
             print('heat stable!')
 
-        output = "{0:.2f} C, {1:.2f} hPa, {2:.2f} %RH, {3:.2f} ohm".format(bme.data.temperature, bme.data.pressure, bme.data.humidity, bme.data.gas_resistance)
-        return(output)
+        #output = "{0:.2f} C, {1:.2f} hPa, {2:.2f} %RH, {3:.2f} ohm".format(bme.data.temperature, bme.data.pressure, bme.data.humidity, bme.data.gas_resistance)
+        readings = {
+            "temperature": bme.data.temperature,
+            "humidity": bme.data.humidity,
+            "pressure": bme.data.pressure,
+            "gas_resistance": bme.data.gas_resistance
+        }
+        return(readings)
