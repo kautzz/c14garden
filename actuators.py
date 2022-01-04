@@ -12,7 +12,7 @@ valve1 = LED(18)
 def read():
     readings = {
         "actor": "v1",
-        "active": bool(valve1.value)
+        "active": bool(!valve1.value)
     }
     send(readings)
     return(readings)
