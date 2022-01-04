@@ -7,6 +7,7 @@ Garden automation, main application.
 import sensors
 import actuators
 import time
+import datetime
 import paho.mqtt.client as mqtt
 
 
@@ -17,25 +18,16 @@ def main():
     setup_hardware()
     try:
         while True:
-            print('running main')
+            print(str(datetime.datetime.now()))
             sensReadings = sensors.read()
-
-            if sensReadings:
-                client = mqtt.Client()
-                client.connect("192.168.1.100",1883,60)
-                client.publish("growbed1/sensors", str(sensReadings))
-                client.disconnect()
-
             actReadings = actuators.read()
 
-            client = mqtt.Client()
-            client.connect("192.168.1.100",1883,60)
-            client.publish("growbed1/actuators", str(actReadings))
-            client.disconnect()
+            print(str(sensReadings))
+            print(str(actReadings))
 
             #actuators.toggleloop()
             actuators.valve1.on()
-            time.sleep(3)
+            actReadings = actuators.read()
             actuators.valve1.off()
 
             time.sleep(10)

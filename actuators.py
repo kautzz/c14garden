@@ -5,8 +5,23 @@ Garden automation, controlling actuators.
 """
 from gpiozero import LED
 from time import sleep
+import paho.mqtt.client as mqtt
 
 valve1 = LED(18)
+
+def read():
+    readings = {
+        "actor": "v1",
+        "active": bool(valve1.value)
+    }
+    send(readings)
+    return(readings)
+
+def send(readings):
+    client = mqtt.Client()
+    client.connect("192.168.1.100",1883,60)
+    client.publish("growbed1/actuators", str(readings))
+    client.disconnect()
 
 def toggleloop():
     while True:
@@ -14,11 +29,3 @@ def toggleloop():
         sleep(5)
         valve1.off()
         sleep(5)
-
-def read():
-    v1 = valve1.value
-    readings = {
-        "actor": "Valve_1",
-        "active": bool(valve1.value)
-    }
-    return(readings)
