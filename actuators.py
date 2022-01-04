@@ -19,6 +19,6 @@ def read():
     v1 = valve1.value()
     readings = {
         "actor": "Valve_1",
-        "active": v1
+        "active": bool(valve1.value())
     }
     return(readings)
