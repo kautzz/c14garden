@@ -14,3 +14,10 @@ def set():
         sleep(5)
         valve1.off()
         sleep(5)
+
+def read():
+    readings = {
+        "actor": "Valve_1",
+        "active": valve1.value(),
+    }
+    return(readings)

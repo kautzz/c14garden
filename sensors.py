@@ -18,12 +18,12 @@ def setup_bme():
     bme.set_gas_heater_duration(150)
     bme.select_gas_heater_profile(0)
 
-def read_bme():
+def read():
     print('reading bme data')
     if bme.get_sensor_data():
         if bme.data.heat_stable:
             readings = {
-                "sensor": "BME680.1",
+                "sensor": "BME680",
                 "temperature": bme.data.temperature,
                 "humidity": bme.data.humidity,
                 "pressure": bme.data.pressure,

@@ -18,14 +18,20 @@ def main():
     try:
         while True:
             print('running main')
-            readings = sensors.read_bme()
+            sensReadings = sensors.read()
 
             if readings:
-                print(readings)
                 client = mqtt.Client()
                 client.connect("192.168.1.100",1883,60)
-                client.publish("growbed1/sensors", str(readings))
+                client.publish("growbed1/sensors", str(sensReadings))
                 client.disconnect()
+
+            actReadings = actuators.read()
+
+            client = mqtt.Client()
+            client.connect("192.168.1.100",1883,60)
+            client.publish("growbed1/actuators", str(actReadings))
+            client.disconnect()
 
             actuators.set()
 
