@@ -27,6 +27,7 @@ def main():
 
             #actuators.toggleloop()
             actuators.valve1.on()
+            time.sleep(3)
             actReadings = actuators.read()
             time.sleep(3)
             actuators.valve1.off()
