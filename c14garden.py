@@ -25,14 +25,17 @@ def main():
             print(str(sensReadings))
             print(str(actReadings))
 
-            #actuators.toggleloop()
+            time.sleep(5)
             actuators.valve1.on()
-            time.sleep(3)
-            actReadings = actuators.read()
-            time.sleep(3)
-            actuators.valve1.off()
 
-            time.sleep(10)
+            sensReadings = sensors.read()
+            actReadings = actuators.read()
+
+            print(str(sensReadings))
+            print(str(actReadings))
+
+            actuators.valve1.off()
+            time.sleep(5)
 
     except KeyboardInterrupt:
         pass
