@@ -20,7 +20,7 @@ def main():
             print('running main')
             sensReadings = sensors.read()
 
-            if readings:
+            if sensReadings:
                 client = mqtt.Client()
                 client.connect("192.168.1.100",1883,60)
                 client.publish("growbed1/sensors", str(sensReadings))
@@ -33,7 +33,10 @@ def main():
             client.publish("growbed1/actuators", str(actReadings))
             client.disconnect()
 
-            actuators.set()
+            #actuators.toggleloop()
+            actuators.valve1.on()
+            time.sleep(3)
+            actuators.valve1.off()
 
             time.sleep(10)
 

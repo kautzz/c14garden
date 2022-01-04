@@ -8,7 +8,7 @@ from time import sleep
 
 valve1 = LED(18)
 
-def set():
+def toggleloop():
     while True:
         valve1.on()
         sleep(5)
