@@ -16,9 +16,9 @@ def toggleloop():
         sleep(5)
 
 def read():
-    #v1 = valve1.value()
+    v1 = valve1.value()
     readings = {
         "actor": "Valve_1",
-        "active": valve1.value()
+        "active": v1
     }
     return(readings)
