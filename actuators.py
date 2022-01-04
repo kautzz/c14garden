@@ -10,7 +10,7 @@ valve1 = LED(18)
 
 def set():
     while True:
-        led.on()
+        valve1.on()
         sleep(5)
-        led.off()
+        valve1.off()
         sleep(5)
