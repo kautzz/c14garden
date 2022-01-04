@@ -34,8 +34,9 @@ def main():
             print(str(sensReadings))
             print(str(actReadings))
 
-            actuators.valve1.off()
             time.sleep(5)
+            actuators.valve1.off()
+
 
     except KeyboardInterrupt:
         pass
