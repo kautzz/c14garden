@@ -27,6 +27,8 @@ def main():
 
             time.sleep(5)
             actuators.valve1.on()
+            time.sleep(5)
+
 
             sensReadings = sensors.read()
             actReadings = actuators.read()
@@ -36,6 +38,8 @@ def main():
 
             time.sleep(5)
             actuators.valve1.off()
+            time.sleep(5)
+
 
 
     except KeyboardInterrupt:
