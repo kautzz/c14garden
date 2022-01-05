@@ -11,11 +11,11 @@ import json
 def set(cmd):
     if cmd['system'] == "reboot":
         print("Rebooting Now!")
-        os.system("reboot")
+        os.system("sudo reboot")
 
     elif cmd['system'] == "halt":
         print("Halting Now!")
-        os.system("halt")
+        os.system("sudo halt")
 
     elif cmd['system'] == "kill":
         print("Killing Myself!")
