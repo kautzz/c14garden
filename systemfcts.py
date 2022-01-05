@@ -8,6 +8,11 @@ import os
 import sys
 import json
 import paho.mqtt.client as mqtt
+
+from configparser import ConfigParser
+config = ConfigParser()
+config.read('settings.ini')
+
 client = mqtt.Client(config['mqtt']['pubcli'], False)
 
 def set(cmd):
