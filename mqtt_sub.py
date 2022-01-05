@@ -19,6 +19,25 @@ def on_connect(client, userdata, flags, rc):
 def on_message(client, userdata, msg):
     print("Message received-> " + msg.topic + " " + str(msg.payload))  # Print a received msg
 
+    # control actuators remotely
+    # {'actor': 'v1', 'active': True}
+    # readings = {
+    #     "actor": "v1",
+    #     "active": not valve1.value
+    # }
+
+    m_decode=str(msg.payload.decode("utf-8","ignore"))
+    print("data Received type",type(m_decode))
+    print("data Received",m_decode)
+    print("Converting from Json to Object")
+    m_in=json.loads(m_decode) #decode json data
+    print(type(m_in))
+    print("broker 2 address = ",m_in["broker2"])
+
+    # change settings of individual sensors remotely
+    # {'sensor': 'BME680', ...}
+
+
 def get_commands():
     client.on_connect = on_connect  # Define callback function for successful connection
     client.on_message = on_message  # Define callback function for receipt of a message

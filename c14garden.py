@@ -36,12 +36,8 @@ def main():
                 print('Reading Sensors. lastRead: ' + str(lastRead))
                 get_readings()
                 lastRead = datetime.datetime.now().timestamp()
-            else:
-                print(str(datetime.datetime.now().timestamp() - lastRead))
 
             mqtt_sub.get_commands()
-
-
 
     except KeyboardInterrupt:
         pass
