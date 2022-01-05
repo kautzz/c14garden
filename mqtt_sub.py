@@ -21,6 +21,7 @@ def on_connect(client, userdata, flags, rc):
     client.subscribe("growbed1/cmd", 1)
 
 def on_message(client, userdata, msg):
+    global systemcmd
     # control actuators remotely
     # {'actuator': 'v1', 'active': True}
     # change settings of individual sensors remotely
