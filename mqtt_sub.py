@@ -5,11 +5,15 @@ Garden automation, subscribing to topics, reading & handling messages.
 """
 import time
 import paho.mqtt.client as mqtt
-client = mqtt.Client("growbed1", False)
+
+from configparser import ConfigParser
+config = ConfigParser()
+config.read('settings.ini')
+
+client = mqtt.Client(config.getstr('mqtt', 'cli'), False)
 
 # The callback for when the client connects to the broker
 def on_connect(client, userdata, flags, rc):
-    print("Connection Code {0}".format(str(rc)))
     client.subscribe("growbed1/cmd", 1)
 
 def on_message(client, userdata, msg):
@@ -20,5 +24,5 @@ def get_commands():
     client.on_message = on_message  # Define callback function for receipt of a message
     client.connect('192.168.1.100', 1883, 60)
     client.loop_start()
-    time.sleep(1)
+    time.sleep(config.getint('intervals', 'readSensorEvery') - 1)
     client.loop_stop()

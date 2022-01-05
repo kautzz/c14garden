@@ -11,7 +11,9 @@ import time
 import datetime
 import paho.mqtt.client as mqtt
 
-readSensorEvery = 10
+from configparser import ConfigParser
+config = ConfigParser()
+config.read('settings.ini')
 
 def setup_hardware():
     sensors.setup_bme()
@@ -30,7 +32,7 @@ def main():
     setup_hardware()
     try:
         while True:
-            if readSensorEvery <= datetime.datetime.now().timestamp() - lastRead:
+            if config.getint('intervals', 'readSensorEvery') <= datetime.datetime.now().timestamp() - lastRead:
                 print('Reading Sensors. lastRead: ' + str(lastRead))
                 get_readings()
                 lastRead = datetime.datetime.now().timestamp()
