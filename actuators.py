@@ -44,6 +44,7 @@ def send(readings):
         client.connect("192.168.1.100",1883,60)
         client.publish("growbed1/actuators", json.dumps(readings))
         client.disconnect()
+        lastReadings = not valve1.value
     else:
         print("readings did not change")
 

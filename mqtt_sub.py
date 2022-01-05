@@ -25,14 +25,12 @@ def on_message(client, userdata, msg):
     # {'sensor': 'BME680', ...}
 
     msg_decode=str(msg.payload.decode("utf-8","ignore"))
-    print("Data Received", msg_decode)
+    print("Command Received", msg_decode)
     try:
         msg_in=json.loads(msg_decode)
         firstKey = list(msg_in.keys())[0]
-        print(firstKey)
 
         if firstKey == "actor":
-            print("actuator key detected")
             actuators.set(msg_in)
 
         elif firstKey == 'sensor':
