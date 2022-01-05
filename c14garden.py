@@ -31,6 +31,15 @@ def get_readings():
 def main():
     lastRead = datetime.datetime.now().timestamp() * -1
     setup_hardware()
+
+    try:
+        client.connect("192.168.1.100",1883,60)
+        client.publish("growbed1/system", "{'sysmsg': 'script start'}")
+        client.disconnect()
+
+    except Exception as e:
+        print(e)
+
     try:
         while True:
             if config.getint('intervals', 'readSensorEvery') <= datetime.datetime.now().timestamp() - lastRead:
