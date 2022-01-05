@@ -7,7 +7,7 @@ import time
 import json
 import paho.mqtt.client as mqtt
 import actuators
-import sys
+import systemfcts
 
 from configparser import ConfigParser
 config = ConfigParser()
@@ -38,7 +38,7 @@ def on_message(client, userdata, msg):
             pass
 
         elif firstKey == 'system':
-            sys.set(msg_in)
+            systemfcts.set(msg_in)
 
         else:
             print("Unknown Command!")
