@@ -7,6 +7,7 @@ import time
 import json
 import paho.mqtt.client as mqtt
 import actuators
+import sys
 
 from configparser import ConfigParser
 config = ConfigParser()
@@ -20,7 +21,7 @@ def on_connect(client, userdata, flags, rc):
 
 def on_message(client, userdata, msg):
     # control actuators remotely
-    # {'actor': 'v1', 'active': True}
+    # {'actuator': 'v1', 'active': True}
     # change settings of individual sensors remotely
     # {'sensor': 'BME680', ...}
 
@@ -36,8 +37,11 @@ def on_message(client, userdata, msg):
         elif firstKey == 'sensor':
             pass
 
+        elif firstKey == 'system':
+            sys.set(msg_in)
+
         else:
-            print("No Sensor Or Actuator Specified!")
+            print("Unknown Command!")
 
     except Exception as e:
         print("Invalid Message Format!")

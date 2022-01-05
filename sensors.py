@@ -33,7 +33,6 @@ def read():
             "humidity": bme.data.humidity,
             "pressure": bme.data.pressure,
         }
-
         if bme.data.heat_stable:
             readings['gas_resistance'] = bme.data.gas_resistance
 
