@@ -40,7 +40,6 @@ def on_message(client, userdata, msg):
             pass
 
         elif firstKey == 'system':
-            #systemfcts.set(msg_in)
             systemcmd = msg_in
 
         else:
@@ -53,14 +52,14 @@ def on_message(client, userdata, msg):
 
 def get_commands():
     global systemcmd
-    client.on_connect = on_connect  # Define callback function for successful connection
-    client.on_message = on_message  # Define callback function for receipt of a message
+    client.on_connect = on_connect
+    client.on_message = on_message
     client.connect('192.168.1.100', 1883, 60)
     client.loop_start()
     #time.sleep(config.getint('intervals', 'readSensorEvery'))
     time.sleep(1)
     client.loop_stop()
-    print(systemcmd)
+    #running sys cmds like kill, reboot, halt after loop_stop so that mqtt message gets consumed
     if systemcmd:
         systemfcts.set(systemcmd)
         systemcmd = False
