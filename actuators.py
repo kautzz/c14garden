@@ -9,6 +9,12 @@ from time import sleep
 import paho.mqtt.client as mqtt
 import json
 
+from configparser import ConfigParser
+config = ConfigParser()
+config.read('settings.ini')
+
+client = mqtt.Client(config['mqtt']['cli'], False)
+
 # 2 CH relay connected to pin 18 on the pi
 valve1 = LED(18)
 
@@ -32,10 +38,8 @@ def read():
 
 def send(readings):
     if readings:
-        client = mqtt.Client()
         client.connect("192.168.1.100",1883,60)
         client.publish("growbed1/actuators", json.dumps(readings))
-        client.disconnect()
 
 def set(cmd):
     print(cmd)
