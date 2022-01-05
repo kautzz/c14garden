@@ -18,8 +18,6 @@ def on_connect(client, userdata, flags, rc):
     client.subscribe("growbed1/cmd", 1)
 
 def on_message(client, userdata, msg):
-    print("Message received-> " + msg.topic + " " + str(msg.payload))  # Print a received msg
-
     # control actuators remotely
     # {'actor': 'v1', 'active': True}
     # readings = {
@@ -27,14 +25,12 @@ def on_message(client, userdata, msg):
     #     "active": not valve1.value
     # }
 
-    m_decode=str(msg.payload.decode("utf-8","ignore"))
-    print("data Received type",type(m_decode))
-    print("data Received",m_decode)
-    print("Converting from Json to Object")
+    msg_decode=str(msg.payload.decode("utf-8","ignore"))
+    print("Data Received", msg_decode)
     try:
-        m_in=json.loads(m_decode) #decode json data
-        print(type(m_in))
-        print("command for = ",m_in["actor"])
+        msg_in=json.loads(msg_decode)
+        print("command for = ",msg_in["actor"])
+        print(msg_in.keys()[0])
     except:
         print("Invalid Message Format!")
 
