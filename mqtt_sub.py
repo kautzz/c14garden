@@ -38,6 +38,7 @@ def on_message(client, userdata, msg):
             pass
 
         elif firstKey == 'system':
+            client.loop_stop()
             systemfcts.set(msg_in)
 
         else:
