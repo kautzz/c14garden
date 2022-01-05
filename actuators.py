@@ -21,9 +21,11 @@ valve1 = LED(18)
 # relay board has reversed input, 0 is on...
 def activate(device):
     device.off()
+    read()
 
 def deactivate(device):
     device.on()
+    read()
 
 def setup_gpio():
     deactivate(valve1)
@@ -43,10 +45,11 @@ def send(readings):
         client.disconnect()
 
 def set(cmd):
-    device = cmd['actor']
-    status = cmd['active']
-
-    read()
+    if cmd['actor'] == "v1":
+        if cmd['active'] == True:
+            activate(valve1)
+        elif cmd['active'] == False:
+            deactivate(valve1)
 
 def toggleloop():
     while True:

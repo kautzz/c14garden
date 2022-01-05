@@ -21,6 +21,8 @@ def on_connect(client, userdata, flags, rc):
 def on_message(client, userdata, msg):
     # control actuators remotely
     # {'actor': 'v1', 'active': True}
+    # change settings of individual sensors remotely
+    # {'sensor': 'BME680', ...}
 
     msg_decode=str(msg.payload.decode("utf-8","ignore"))
     print("Data Received", msg_decode)
@@ -42,9 +44,6 @@ def on_message(client, userdata, msg):
     except Exception as e:
         print("Invalid Message Format!")
         print(e)
-
-    # change settings of individual sensors remotely
-    # {'sensor': 'BME680', ...}
 
 
 def get_commands():
