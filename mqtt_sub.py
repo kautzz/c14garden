@@ -28,11 +28,11 @@ def on_message(client, userdata, msg):
         msg_in=json.loads(msg_decode)
         print(list(msg_in.keys())[0])
 
-        if list(msg_in.keys()[0]) == "actor":
+        if list(msg_in.keys()[0]) === "actor":
             print("actuator key detected")
             actuators.set(msg_in)
 
-        elif list(msg_in.keys()[0]) == 'sensor':
+        elif list(msg_in.keys()[0]) === 'sensor':
             pass
 
         else:
