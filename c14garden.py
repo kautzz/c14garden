@@ -30,12 +30,12 @@ def main():
     setup_hardware()
     try:
         while True:
-            if readSensorEvery <= datetime.timestamp() - lastRead:
+            if readSensorEvery <= datetime.datetime.now().timestamp() - lastRead:
                 print('Reading Sensors. lastRead: ' + str(lastRead))
                 get_readings()
-                lastRead = datetime.timestamp()
+                lastRead = datetime.datetime.now().timestamp()
             else:
-                print(str(datetime.timestamp() - lastRead))
+                print(str(datetime.datetime.now().timestamp() - lastRead))
 
             mqtt_sub.get_commands()
 
