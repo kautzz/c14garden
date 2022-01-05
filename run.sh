@@ -1,10 +1,12 @@
 #!/bin/bash
+tmux new-session -d -s "log"
+tmux send-keys -t "log" "python3 c14garden.py" Enter
+
 while true; do
-  tmux new-session -d -s "log"
-  tmux send-keys -t "log" "python3 c14garden.py" Enter
   tmux attach -t "log"
+  python3 c14garden.py
   tmux kill-session -t "log"
-  #python3 c14garden.py
+
   sleep 10
 done
 exit
