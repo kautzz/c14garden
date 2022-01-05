@@ -25,20 +25,7 @@ def main():
             print(str(sensReadings))
             print(str(actReadings))
 
-            time.sleep(5)
-            actuators.valve1.on()
-            time.sleep(5)
-
-
-            sensReadings = sensors.read()
-            actReadings = actuators.read()
-
-            print(str(sensReadings))
-            print(str(actReadings))
-
-            time.sleep(5)
-            actuators.valve1.off()
-            time.sleep(5)
+            time.sleep(10)
 
 
 
