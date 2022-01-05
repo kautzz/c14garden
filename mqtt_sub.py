@@ -26,14 +26,13 @@ def on_message(client, userdata, msg):
     print("Data Received", msg_decode)
     try:
         msg_in=json.loads(msg_decode)
-        print("command for = ",msg_in["actor"])
         print(list(msg_in.keys())[0])
 
-        if list(msg_in.keys()[0]) == 'actuator':
+        if list(msg_in.keys()[0]) == "actor":
             print("actuator key detected")
             actuators.set(msg_in)
 
-        elif list(msg_in.keys()[0]) == 'actuator':
+        elif list(msg_in.keys()[0]) == 'sensor':
             pass
 
         else:
