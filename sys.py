@@ -9,4 +9,4 @@ import json
 
 def set(cmd):
     if cmd['system'] == "reboot":
-        print(reboot)
+        print("reboot")
