@@ -19,4 +19,4 @@ def set(cmd):
 
     elif cmd['system'] == "kill":
         print("killing myself!")
-        os.system("killall python3")
+        #os.system("killall python3")
