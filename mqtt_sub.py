@@ -14,6 +14,7 @@ config = ConfigParser()
 config.read('settings.ini')
 
 client = mqtt.Client(config['mqtt']['subcli'], False)
+systemcmd = False
 
 # The callback for when the client connects to the broker
 def on_connect(client, userdata, flags, rc):
@@ -38,10 +39,8 @@ def on_message(client, userdata, msg):
             pass
 
         elif firstKey == 'system':
-            client.loop_stop()
-            client.disconnect()
-            time.sleep(1)
-            systemfcts.set(msg_in)
+            #systemfcts.set(msg_in)
+            systemcmd = msg_in
 
         else:
             print("Unknown Command!")
@@ -56,5 +55,9 @@ def get_commands():
     client.on_message = on_message  # Define callback function for receipt of a message
     client.connect('192.168.1.100', 1883, 60)
     client.loop_start()
-    time.sleep(config.getint('intervals', 'readSensorEvery'))
+    #time.sleep(config.getint('intervals', 'readSensorEvery'))
+    time.sleep(1)
     client.loop_stop()
+    if systemcmd:
+        systemfcts.set(systemcmd)
+        systemcmd = False
