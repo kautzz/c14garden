@@ -39,7 +39,6 @@ def send(readings):
 
 def set(cmd):
     print(cmd)
-    print("command for = ",msg_in['actor'])
     device = cmd['actor']
     status = cmd['active']
 
