@@ -30,7 +30,7 @@ def on_message(client, userdata, msg):
         msg_in=json.loads(msg_decode)
         firstKey = list(msg_in.keys())[0]
 
-        if firstKey == "actor":
+        if firstKey == "actuator":
             actuators.set(msg_in)
 
         elif firstKey == 'sensor':

@@ -33,7 +33,7 @@ def setup_gpio():
 
 def read():
     readings = {
-        "actor": "v1",
+        "actuator": "v1",
         "active": not valve1.value
     }
     send(readings)
