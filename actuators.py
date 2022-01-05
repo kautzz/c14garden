@@ -3,14 +3,23 @@
 """
 Garden automation, controlling actuators.
 """
+
 from gpiozero import LED
 from time import sleep
 import paho.mqtt.client as mqtt
 
+# 2 CH relay connected to pin 18 on the pi
 valve1 = LED(18)
 
+# relay board has reversed input, 0 is on...
+def activate(device):
+    device.off()
+
+def deactivate(device):
+    device.on()
+
 def setup_gpio():
-    valve1.on()
+    deactivate(valve1)
 
 def read():
     readings = {
