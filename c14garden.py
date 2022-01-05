@@ -13,6 +13,7 @@ import paho.mqtt.client as mqtt
 
 def setup_hardware():
     sensors.setup_bme()
+    actuators.setup_gpio()
 
 def main():
     setup_hardware()

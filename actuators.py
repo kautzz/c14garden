@@ -9,6 +9,9 @@ import paho.mqtt.client as mqtt
 
 valve1 = LED(18)
 
+def setup_gpio():
+    valve1.off()
+
 def read():
     readings = {
         "actor": "v1",
