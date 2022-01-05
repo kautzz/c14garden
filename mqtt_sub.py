@@ -6,6 +6,7 @@ Garden automation, subscribing to topics, reading & handling messages.
 import time
 import json
 import paho.mqtt.client as mqtt
+import actuators
 
 from configparser import ConfigParser
 config = ConfigParser()
@@ -20,10 +21,6 @@ def on_connect(client, userdata, flags, rc):
 def on_message(client, userdata, msg):
     # control actuators remotely
     # {'actor': 'v1', 'active': True}
-    # readings = {
-    #     "actor": "v1",
-    #     "active": not valve1.value
-    # }
 
     msg_decode=str(msg.payload.decode("utf-8","ignore"))
     print("Data Received", msg_decode)
@@ -31,6 +28,17 @@ def on_message(client, userdata, msg):
         msg_in=json.loads(msg_decode)
         print("command for = ",msg_in["actor"])
         print(list(msg_in.keys())[0])
+
+        if list(msg_in.keys()[0]) == 'actuator':
+            print("actuator key detected")
+            actuators.set(msg_in)
+
+        else if list(msg_in.keys()[0]) == 'actuator':
+            pass
+
+        else:
+            print("No Sensor Or Actuator Specified!")
+
     except:
         print("Invalid Message Format!")
 

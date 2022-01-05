@@ -37,6 +37,14 @@ def send(readings):
         client.publish("growbed1/actuators", json.dumps(readings))
         client.disconnect()
 
+def set(cmd):
+    print(cmd)
+    print("command for = ",msg_in['actor'])
+    device = cmd['actor']
+    status = cmd['active']
+
+    read()
+
 def toggleloop():
     while True:
         valve1.on()
