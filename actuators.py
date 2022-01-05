@@ -7,6 +7,7 @@ Garden automation, controlling actuators.
 from gpiozero import LED
 from time import sleep
 import paho.mqtt.client as mqtt
+import json
 
 # 2 CH relay connected to pin 18 on the pi
 valve1 = LED(18)
@@ -33,7 +34,7 @@ def send(readings):
     if readings:
         client = mqtt.Client()
         client.connect("192.168.1.100",1883,60)
-        client.publish("growbed1/actuators", str(readings))
+        client.publish("growbed1/actuators", json.dumps(readings))
         client.disconnect()
 
 def toggleloop():
