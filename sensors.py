@@ -39,8 +39,9 @@ def read():
         if bme.data.heat_stable:
             readings.gas_resistance = bme.data.gas_resistance
 
-    send(readings)
-    return(readings)
+        send(readings)
+        return(readings)
+    return(False)
 
 def send(readings):
     if readings:
