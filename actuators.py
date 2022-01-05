@@ -43,7 +43,6 @@ def send(readings):
         client.disconnect()
 
 def set(cmd):
-    print(cmd)
     device = cmd['actor']
     status = cmd['active']
 
