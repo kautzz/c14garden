@@ -9,6 +9,12 @@ bme = bme680.BME680()
 import paho.mqtt.client as mqtt
 import json
 
+from configparser import ConfigParser
+config = ConfigParser()
+config.read('settings.ini')
+
+client = mqtt.Client(config['mqtt']['pubcli'], False)
+
 def setup_bme():
     bme.set_humidity_oversample(bme680.OS_2X)
     bme.set_pressure_oversample(bme680.OS_4X)
@@ -35,7 +41,6 @@ def read():
 
 def send(readings):
     if readings:
-        client = mqtt.Client()
         client.connect("192.168.1.100",1883,60)
         client.publish("growbed1/sensors", json.dumps(readings))
         client.disconnect()

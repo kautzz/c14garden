@@ -12,7 +12,7 @@ from configparser import ConfigParser
 config = ConfigParser()
 config.read('settings.ini')
 
-client = mqtt.Client(config['mqtt']['cli'], False)
+client = mqtt.Client(config['mqtt']['subcli'], False)
 
 # The callback for when the client connects to the broker
 def on_connect(client, userdata, flags, rc):
