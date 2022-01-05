@@ -17,7 +17,7 @@ client = mqtt.Client(config['mqtt']['pubcli'], False)
 
 # 2 CH relay connected to pin 18 on the pi
 valve1 = LED(18)
-lastReadings = 0
+global lastReadings = not valve1.value
 
 # relay board has reversed input, 0 is on...
 def activate(device):
