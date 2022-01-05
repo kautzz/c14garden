@@ -34,7 +34,7 @@ def on_message(client, userdata, msg):
     try:
         m_in=json.loads(m_decode) #decode json data
         print(type(m_in))
-        print("broker 2 address = ",m_in["broker2"])
+        print("command for = ",m_in["actor"])
     except:
         print("Invalid Message Format!")
 
