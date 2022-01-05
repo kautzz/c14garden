@@ -10,13 +10,13 @@ import json
 
 def set(cmd):
     if cmd['system'] == "reboot":
-        print("rebooting now!")
+        print("Rebooting Now!")
         os.system("reboot")
 
     elif cmd['system'] == "halt":
-        print("halting now!")
+        print("Halting Now!")
         os.system("halt")
 
     elif cmd['system'] == "kill":
-        print("killing myself!")
+        print("Killing Myself!")
         os.system("killall python3")
