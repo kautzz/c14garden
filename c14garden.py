@@ -11,6 +11,7 @@ import time
 import datetime
 import paho.mqtt.client as mqtt
 
+readSensorEvery = 10
 
 def setup_hardware():
     sensors.setup_bme()
@@ -25,11 +26,16 @@ def get_readings():
     print("")
 
 def main():
+    lastRead = datetime.timestamp() * -1
     setup_hardware()
     try:
         while True:
-            get_readings()
-            time.sleep(10)
+            if readSensorEvery <= datetime.timestamp() - lastRead:
+                print('Reading Sensors. lastRead: ' + str(lastRead))
+                get_readings()
+                lastRead = datetime.timestamp()
+            else:
+                print(str(datetime.timestamp() - lastRead))
 
             mqtt_sub.get_commands()
 
