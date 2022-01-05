@@ -10,7 +10,7 @@ client = mqtt.Client("growbed1", False)
 # The callback for when the client connects to the broker
 def on_connect(client, userdata, flags, rc):
     print("Connection Code {0}".format(str(rc)))
-    client.subscribe("growbed1/cmd")
+    client.subscribe("growbed1/cmd", 1)
 
 def on_message(client, userdata, msg):
     print("Message received-> " + msg.topic + " " + str(msg.payload))  # Print a received msg
