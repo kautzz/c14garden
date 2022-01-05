@@ -17,6 +17,7 @@ client = mqtt.Client(config['mqtt']['pubcli'], False)
 
 # 2 CH relay connected to pin 18 on the pi
 valve1 = LED(18)
+lastReadings = not valve1.value
 
 # relay board has reversed input, 0 is on...
 def activate(device):
@@ -39,10 +40,12 @@ def read():
     return(readings)
 
 def send(readings):
-    if readings:
+    if readings != lastReadings:
         client.connect("192.168.1.100",1883,60)
         client.publish("growbed1/actuators", json.dumps(readings))
         client.disconnect()
+    else:
+        print("readings did not change")
 
 def set(cmd):
     if cmd['actor'] == "v1":
@@ -50,10 +53,3 @@ def set(cmd):
             activate(valve1)
         elif cmd['active'] == False:
             deactivate(valve1)
-
-def toggleloop():
-    while True:
-        valve1.on()
-        sleep(5)
-        valve1.off()
-        sleep(5)
