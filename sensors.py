@@ -32,7 +32,6 @@ def read():
             "temperature": bme.data.temperature,
             "humidity": bme.data.humidity,
             "pressure": bme.data.pressure,
-            "gas_resistance": 0
         }
 
         if bme.data.heat_stable:
