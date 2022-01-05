@@ -19,4 +19,3 @@ client = mqtt.Client()
 client.on_connect = on_connect  # Define callback function for successful connection
 client.on_message = on_message  # Define callback function for receipt of a message
 client.connect('192.168.1.100', 1883, 60)
-client.loop_forever()
