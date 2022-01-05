@@ -59,6 +59,7 @@ def get_commands():
     #time.sleep(config.getint('intervals', 'readSensorEvery'))
     time.sleep(1)
     client.loop_stop()
+    print(systemcmd)
     if systemcmd:
         systemfcts.set(systemcmd)
         systemcmd = False
