@@ -20,5 +20,5 @@ def get_commands():
     client.on_message = on_message  # Define callback function for receipt of a message
     client.connect('192.168.1.100', 1883, 60)
     client.loop_start()
-    time.sleep(5)
+    time.sleep(1)
     client.loop_stop()
