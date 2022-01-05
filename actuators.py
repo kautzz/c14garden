@@ -47,8 +47,8 @@ def send(readings):
         client.disconnect()
         lastReadings = readings
     else:
-        print("readings did not change")
-
+        pass
+    
 def set(cmd):
     if cmd['actuator'] == "v1":
         if cmd['active'] == True:
