@@ -26,7 +26,7 @@ def get_readings():
     print("")
 
 def main():
-    lastRead = datetime.timestamp() * -1
+    lastRead = (datetime.datetime.now())datetime.timestamp() * -1
     setup_hardware()
     try:
         while True:
