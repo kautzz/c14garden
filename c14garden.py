@@ -10,6 +10,7 @@ import mqtt_sub
 import time
 import datetime
 import paho.mqtt.client as mqtt
+import json
 
 from configparser import ConfigParser
 config = ConfigParser()
@@ -23,8 +24,8 @@ def get_readings():
     sensReadings = sensors.read()
     actReadings = actuators.read()
     print(str(datetime.datetime.now()))
-    print(str(sensReadings))
-    print(str(actReadings))
+    print(json.dumps(sensReadings))
+    print(json.dumps(actReadings))
     print("")
 
 def main():
