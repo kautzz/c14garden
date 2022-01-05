@@ -50,7 +50,7 @@ def send(readings):
         print("readings did not change")
 
 def set(cmd):
-    if cmd['actor'] == "v1":
+    if cmd['actuator'] == "v1":
         if cmd['active'] == True:
             activate(valve1)
         elif cmd['active'] == False:
