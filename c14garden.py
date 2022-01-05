@@ -33,7 +33,6 @@ def main():
     try:
         while True:
             if config.getint('intervals', 'readSensorEvery') <= datetime.datetime.now().timestamp() - lastRead:
-                print('Reading Sensors. lastRead: ' + str(lastRead))
                 get_readings()
                 lastRead = datetime.datetime.now().timestamp()
 

@@ -4,6 +4,7 @@
 Garden automation, subscribing to topics, reading & handling messages.
 """
 import time
+import json
 import paho.mqtt.client as mqtt
 
 from configparser import ConfigParser
