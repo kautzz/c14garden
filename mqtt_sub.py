@@ -30,7 +30,7 @@ def on_message(client, userdata, msg):
     try:
         msg_in=json.loads(msg_decode)
         print("command for = ",msg_in["actor"])
-        print(msg_in.keys()[0])
+        print(list(msg_in.keys())[0])
     except:
         print("Invalid Message Format!")
 
