@@ -29,7 +29,7 @@ def main():
     try:
         while True:
             get_readings()
-            time.sleep(5)
+            time.sleep(10)
 
             mqtt_sub.get_commands()
 
