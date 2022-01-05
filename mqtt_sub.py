@@ -33,7 +33,7 @@ def on_message(client, userdata, msg):
             print("actuator key detected")
             actuators.set(msg_in)
 
-        else if list(msg_in.keys()[0]) == 'actuator':
+        elif list(msg_in.keys()[0]) == 'actuator':
             pass
 
         else:
