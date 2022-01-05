@@ -38,7 +38,7 @@ def read():
 
         send(readings)
         return(readings)
-    return(False)
+    return()
 
 def send(readings):
     if readings:
