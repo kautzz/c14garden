@@ -38,8 +38,9 @@ def on_message(client, userdata, msg):
         else:
             print("No Sensor Or Actuator Specified!")
 
-    except:
+    except Exception as e:
         print("Invalid Message Format!")
+        print(e)
 
     # change settings of individual sensors remotely
     # {'sensor': 'BME680', ...}
