@@ -29,7 +29,7 @@ def deactivate(device):
     read()
 
 def setup_gpio():
-    deactivate(valve1)
+    valve1.on() # inverted!
 
 def read():
     readings = {
@@ -48,7 +48,7 @@ def send(readings):
         lastReadings = readings
     else:
         pass
-    
+
 def set(cmd):
     if cmd['actuator'] == "v1":
         if cmd['active'] == True:
