@@ -5,8 +5,18 @@ Garden automation, system commands.
 """
 
 import os
+import sys
 import json
 
 def set(cmd):
     if cmd['system'] == "reboot":
-        print("reboot")
+        print("rebooting now!")
+        os.system("reboot")
+
+    elif cmd['system'] == "halt":
+        print("halting now!")
+        os.system("halt")
+
+    elif cmd['system'] == "kill":
+        print("killing myself!")
+        sys.exit()
