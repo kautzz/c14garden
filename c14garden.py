@@ -32,7 +32,6 @@ def main():
             time.sleep(5)
 
             mqtt_sub.get_commands()
-            time.sleep(5)
 
 
 
