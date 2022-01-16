@@ -6,6 +6,7 @@ Garden automation, reading sensors.
 
 #import bme680
 #bme = bme680.BME680()
+import ADS1115
 import paho.mqtt.client as mqtt
 import json
 
@@ -13,6 +14,7 @@ from configparser import ConfigParser
 config = ConfigParser()
 config.read('settings.ini')
 
+adc = ADS1115.ADS1115()
 client = mqtt.Client(config['mqtt']['pubcli'], False)
 
 # def setup_bme():
@@ -35,10 +37,10 @@ def read():
     #     }
     #     if bme.data.heat_stable:
     #         readings['gas_resistance'] = bme.data.gas_resistance
-    
+
     readings = {
         "sensor": "ADC",
-        "A0": 0
+        "A0": adc.readADCSingleEnded()
     }
 
     send(readings)
