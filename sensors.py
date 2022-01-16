@@ -35,15 +35,15 @@ def read():
     #     }
     #     if bme.data.heat_stable:
     #         readings['gas_resistance'] = bme.data.gas_resistance
-            readings = {
-                "sensor": "ADC",
-                "A0": 0
-            }
-            
+    
+    readings = {
+        "sensor": "ADC",
+        "A0": 0
+    }
 
-        send(readings)
-        return(readings)
-    return()
+    send(readings)
+    return(readings)
+    #return()
 
 def send(readings):
     if readings:
