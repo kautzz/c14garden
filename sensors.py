@@ -4,8 +4,8 @@
 Garden automation, reading sensors.
 """
 
-import bme680
-bme = bme680.BME680()
+#import bme680
+#bme = bme680.BME680()
 import paho.mqtt.client as mqtt
 import json
 
@@ -15,26 +15,31 @@ config.read('settings.ini')
 
 client = mqtt.Client(config['mqtt']['pubcli'], False)
 
-def setup_bme():
-    bme.set_gas_status(bme680.ENABLE_GAS_MEAS)
-    bme.set_humidity_oversample(bme680.OS_2X)
-    bme.set_pressure_oversample(bme680.OS_4X)
-    bme.set_temperature_oversample(bme680.OS_8X)
-    bme.set_filter(bme680.FILTER_SIZE_3)
-    bme.set_gas_heater_temperature(320)
-    bme.set_gas_heater_duration(150)
-    bme.select_gas_heater_profile(0)
+# def setup_bme():
+#     bme.set_gas_status(bme680.ENABLE_GAS_MEAS)
+#     bme.set_humidity_oversample(bme680.OS_2X)
+#     bme.set_pressure_oversample(bme680.OS_4X)
+#     bme.set_temperature_oversample(bme680.OS_8X)
+#     bme.set_filter(bme680.FILTER_SIZE_3)
+#     bme.set_gas_heater_temperature(320)
+#     bme.set_gas_heater_duration(150)
+#     bme.select_gas_heater_profile(0)
 
 def read():
-    if bme.get_sensor_data():
-        readings = {
-            "sensor": "BME680",
-            "temperature": bme.data.temperature,
-            "humidity": bme.data.humidity,
-            "pressure": bme.data.pressure,
-        }
-        if bme.data.heat_stable:
-            readings['gas_resistance'] = bme.data.gas_resistance
+    # if bme.get_sensor_data():
+    #     readings = {
+    #         "sensor": "BME680",
+    #         "temperature": bme.data.temperature,
+    #         "humidity": bme.data.humidity,
+    #         "pressure": bme.data.pressure,
+    #     }
+    #     if bme.data.heat_stable:
+    #         readings['gas_resistance'] = bme.data.gas_resistance
+            readings = {
+                "sensor": "ADC",
+                "A0": 0
+            }
+            
 
         send(readings)
         return(readings)
