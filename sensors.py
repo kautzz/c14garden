@@ -40,7 +40,7 @@ def read():
 
     readings = {
         "sensor": "ADC",
-        "A0": adc.readADCSingleEnded()
+        "A0": adc.readADCSingleEnded(0, 5160, 250)
     }
 
     send(readings)
