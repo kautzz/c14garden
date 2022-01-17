@@ -50,8 +50,9 @@ def read():
     #a0 = adc.readADCSingleEnded(0, 5160, 250)
     #a1 = adc.readADCSingleEnded(1, 5160, 250)
 
-    #chan = AnalogIn(ads, ADS.P0, ADS.P1)
-    chan = AnalogIn(ads, ADS.P0)
+    ads.gain = 2/3
+    chan = AnalogIn(ads, ADS.P0, ADS.P1)
+
 
 
     readings = {
