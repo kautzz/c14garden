@@ -17,8 +17,8 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(26, GPIO.OUT)
 GPIO.output(26, GPIO.HIGH)
 
-ads.setInput(7)
-ads.setGain(1)
+ads.setInput(0)
+ads.setGain(0)
 ads.setMode(1)
 ads.setDataRate(7)
 
@@ -62,6 +62,8 @@ def read():
 
     diff_value = ads.readADC_Differential_0_1()
     voltage1 = ads.toVoltage(value)
+
+    print(str(ads.getMaxVoltage()))
 
     readings = {
         "sensor": "ADC",
