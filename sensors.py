@@ -7,12 +7,20 @@ Garden automation, reading sensors.
 #import bme680
 #bme = bme680.BME680()
 #import ADS1115
-import board
-import busio
-i2c = busio.I2C(board.SCL, board.SDA)
-import adafruit_ads1x15.ads1115 as ADS
-from adafruit_ads1x15.analog_in import AnalogIn
 
+import ADS1x15
+import RPi.GPIO as GPIO
+
+ads = ADS1x15.ADS1115(1)
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(26, GPIO.OUT)
+GPIO.output(26, GPIO.HIGH)
+
+ads.setInput(7)
+ads.setGain(1)
+ads.setMode(1)
+ads.setDataRate(7)
 
 import paho.mqtt.client as mqtt
 import json
@@ -50,15 +58,13 @@ def read():
     #a0 = adc.readADCSingleEnded(0, 5160, 250)
     #a1 = adc.readADCSingleEnded(1, 5160, 250)
 
-    ads.gain = 2/3
-    chan = AnalogIn(ads, ADS.P0, ADS.P1)
-
-
+    value = ads.readADC(0)
+    voltage = ads.toVoltage(value)
 
     readings = {
         "sensor": "ADC",
-        "val": chan.value,
-        "vol": chan.voltage
+        "val": value,
+        "vol": voltage
     }
 
     send(readings)
