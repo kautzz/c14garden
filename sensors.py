@@ -20,7 +20,7 @@ GPIO.output(26, GPIO.HIGH)
 ads.setInput(0)
 ads.setGain(0)
 ads.setMode(1)
-ads.setDataRate(7)
+ads.setDataRate(0)
 
 import paho.mqtt.client as mqtt
 import json
