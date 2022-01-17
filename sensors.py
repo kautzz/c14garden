@@ -60,7 +60,7 @@ def read():
     value = ads.readADC(0)
     voltage = ads.toVoltage(value)
 
-    diff_value = readADC_Differential_0_1()
+    diff_value = ads.readADC_Differential_0_1()
     voltage1 = ads.toVoltage(value)
 
     readings = {
