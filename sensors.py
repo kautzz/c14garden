@@ -30,7 +30,6 @@ config = ConfigParser()
 config.read('settings.ini')
 
 #adc = ADS1115.ADS1115()
-ads = ADS.ADS1115(i2c)
 
 client = mqtt.Client(config['mqtt']['pubcli'], False)
 
