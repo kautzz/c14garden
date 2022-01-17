@@ -18,7 +18,7 @@ GPIO.setup(26, GPIO.OUT)
 GPIO.output(26, GPIO.HIGH)
 
 ads.setInput(0)
-ads.setGain(1)
+ads.setGain(2)
 ads.setMode(1)
 ads.setDataRate(7)
 
