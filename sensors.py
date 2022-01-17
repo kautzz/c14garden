@@ -6,7 +6,14 @@ Garden automation, reading sensors.
 
 #import bme680
 #bme = bme680.BME680()
-import ADS1115
+#import ADS1115
+import board
+import busio
+i2c = busio.I2C(board.SCL, board.SDA)
+import adafruit_ads1x15.ads1115 as ADS
+from adafruit_ads1x15.analog_in import AnalogIn
+
+
 import paho.mqtt.client as mqtt
 import json
 
@@ -14,7 +21,9 @@ from configparser import ConfigParser
 config = ConfigParser()
 config.read('settings.ini')
 
-adc = ADS1115.ADS1115()
+#adc = ADS1115.ADS1115()
+ads = ADS.ADS1115(i2c)
+
 client = mqtt.Client(config['mqtt']['pubcli'], False)
 
 # def setup_bme():
@@ -38,14 +47,16 @@ def read():
     #     if bme.data.heat_stable:
     #         readings['gas_resistance'] = bme.data.gas_resistance
 
-    a0 = adc.readADCSingleEnded(0, 5160, 250)
-    a1 = adc.readADCSingleEnded(1, 5160, 250)
+    #a0 = adc.readADCSingleEnded(0, 5160, 250)
+    #a1 = adc.readADCSingleEnded(1, 5160, 250)
+
+    chan = AnalogIn(ads, ADS.P0, ADS.P1)
+
 
     readings = {
         "sensor": "ADC",
-        "A0": a0,
-        "A1": a1,
-        "diff": a1 - a0
+        "val": chan.value,
+        "vol": chan.voltage
     }
 
     send(readings)
