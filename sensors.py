@@ -38,9 +38,14 @@ def read():
     #     if bme.data.heat_stable:
     #         readings['gas_resistance'] = bme.data.gas_resistance
 
+    a0 = adc.readADCSingleEnded(0, 5160, 250)
+    a1 = adc.readADCSingleEnded(1, 5160, 250)
+
     readings = {
         "sensor": "ADC",
-        "A0": adc.readADCSingleEnded(0, 5160, 250)
+        "A0": a0,
+        "A1": a1,
+        "diff": a1 - a0
     }
 
     send(readings)
