@@ -48,15 +48,15 @@ def read():
     #         readings['gas_resistance'] = bme.data.gas_resistance
 
     diff_adc_1 = ads.readADC_Differential_0_1()
-    voltage = ads.toVoltage(diff_adc_1)
+    battery_voltage = ads.toVoltage(diff_adc_1)
 
-    diff_adc_2 = ads.readADC_Differential_0_1()
+    diff_adc_2 = ads.readADC_Differential_2_3()
     light_intensity = ads.toVoltage(diff_adc_2)
 
     readings = {
         "sensor": "ADC",
         "raw_adc": diff_adc_1,
-        "voltage": voltage,
+        "voltage": battery_voltage,
         "light_intensity": light_intensity
 
     }
