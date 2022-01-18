@@ -1,4 +1,4 @@
 # c14garden
-garden automatisation
+off grid garden automation
 
 WIP
