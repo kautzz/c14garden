@@ -9,13 +9,13 @@ Garden automation, reading sensors.
 #import ADS1115
 
 import ADS1x15
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 
 ads = ADS1x15.ADS1115(1)
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(26, GPIO.OUT)
-GPIO.output(26, GPIO.HIGH)
+# GPIO.setmode(GPIO.BCM)
+# GPIO.setup(26, GPIO.OUT)
+# GPIO.output(26, GPIO.HIGH)
 
 ads.setInput(0)
 ads.setGain(0)
@@ -57,13 +57,8 @@ def read():
     #a0 = adc.readADCSingleEnded(0, 5160, 250)
     #a1 = adc.readADCSingleEnded(1, 5160, 250)
 
-    value = ads.readADC(0)
-    voltage = ads.toVoltage(value)
-
     diff_value = ads.readADC_Differential_0_1()
     voltage1 = ads.toVoltage(value)
-
-    print(str(ads.getMaxVoltage()))
 
     readings = {
         "sensor": "ADC",
