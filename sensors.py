@@ -50,7 +50,7 @@ def read():
     diff_adc_1 = ads.readADC_Differential_0_1()
     voltage = ads.toVoltage(diff_adc_1)
 
-    diff_adc_2 = ads.readADC_Differential_2_3()
+    diff_adc_2 = ads.readADC_Differential_0_1()
     light_intensity = ads.toVoltage(diff_adc_2)
 
     readings = {
