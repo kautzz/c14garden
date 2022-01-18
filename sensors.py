@@ -13,9 +13,9 @@ import ADS1x15
 
 ads = ADS1x15.ADS1115(1)
 
-# GPIO.setmode(GPIO.BCM)
-# GPIO.setup(26, GPIO.OUT)
-# GPIO.output(26, GPIO.HIGH)
+#GPIO.setmode(GPIO.BCM)
+#GPIO.setup(26, GPIO.OUT)
+#GPIO.output(26, GPIO.HIGH)
 
 ads.setInput(0)
 ads.setGain(0)
@@ -54,16 +54,13 @@ def read():
     #     if bme.data.heat_stable:
     #         readings['gas_resistance'] = bme.data.gas_resistance
 
-    #a0 = adc.readADCSingleEnded(0, 5160, 250)
-    #a1 = adc.readADCSingleEnded(1, 5160, 250)
-
-    diff_value = ads.readADC_Differential_0_1()
-    voltage1 = ads.toVoltage(value)
+    diff_adc_1 = ads.readADC_Differential_0_1()
+    voltage_1 = ads.toVoltage(diff_adc_1)
 
     readings = {
-        "sensor": "ADC",
-        "val": diff_value,
-        "vol": voltage1
+        "sensor": "ADC1",
+        "raw_adc": diff_adc_1,
+        "voltage": voltage_1
     }
 
     send(readings)
