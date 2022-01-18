@@ -6,16 +6,9 @@ Garden automation, reading sensors.
 
 #import bme680
 #bme = bme680.BME680()
-#import ADS1115
 
 import ADS1x15
-#import RPi.GPIO as GPIO
-
 ads = ADS1x15.ADS1115(1)
-
-#GPIO.setmode(GPIO.BCM)
-#GPIO.setup(26, GPIO.OUT)
-#GPIO.output(26, GPIO.HIGH)
 
 ads.setInput(0)
 ads.setGain(0)
@@ -55,12 +48,17 @@ def read():
     #         readings['gas_resistance'] = bme.data.gas_resistance
 
     diff_adc_1 = ads.readADC_Differential_0_1()
-    voltage_1 = ads.toVoltage(diff_adc_1)
+    voltage = ads.toVoltage(diff_adc_1)
+
+    diff_adc_2 = ads.readADC_Differential_2_3()
+    light_intensity = ads.toVoltage(diff_adc_2)
 
     readings = {
-        "sensor": "ADC1",
+        "sensor": "ADC",
         "raw_adc": diff_adc_1,
-        "voltage": voltage_1
+        "voltage": voltage,
+        "light_intensity": light_intensity
+
     }
 
     send(readings)
