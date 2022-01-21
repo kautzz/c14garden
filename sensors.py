@@ -10,7 +10,7 @@ Garden automation, reading sensors.
 import ADS1x15
 ads = ADS1x15.ADS1115(1)
 
-#ads.setInput(0)
+ads.setInput(0)
 ads.setGain(0)
 #ads.setMode(1)
 #ads.setDataRate(7)
@@ -48,15 +48,16 @@ def read():
     #         readings['gas_resistance'] = bme.data.gas_resistance
     print("Gain before read: " + str(ads.getGain()))
 
+    ads.setInput(0)
     diff_adc_1 = ads.readADC_Differential_0_1()
     battery_voltage = ads.toVoltage(diff_adc_1)
 
+    ads.setInput(3)
     diff_adc_2 = ads.readADC_Differential_2_3()
     light_intensity = ads.toVoltage(diff_adc_2)
     ads.setGain(0)
 
     print("Gain after read: " + str(ads.getGain()))
-
 
     readings = {
         "sensor": "ADS1115",
