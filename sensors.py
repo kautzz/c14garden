@@ -38,20 +38,20 @@ def read():
     if bme.get_sensor_data():
         bme_readings = {
             "sensor": "BME680",
-            "temperature": bme.data.temperature,
-            "humidity": bme.data.humidity,
-            "pressure": bme.data.pressure
+            "temperature": round(bme.data.temperature, 2),
+            "humidity": round(bme.data.humidity, 2),
+            "pressure": round(bme.data.pressure, 2)
         }
         if bme.data.heat_stable:
-            bme_readings['gas_resistance'] = bme.data.gas_resistance
+            bme_readings['gas_resistance'] = round(bme.data.gas_resistance)
 
         send(bme_readings)
 
     # read and send data from ADC
     batt_readings = {
         "sensor": "ADS1115",
-        "battery_voltage": ads.toVoltage(ads.readADC_Differential_0_1()),
-        "light_intensity": (ads.toVoltage(ads.readADC_Differential_2_3())) / 0.05 #divide by VCC to get percent
+        "battery_voltage": round(ads.toVoltage(ads.readADC_Differential_0_1()), 2),
+        "light_intensity": round((ads.toVoltage(ads.readADC_Differential_2_3())) / 0.05, 2) #divide by VCC to get percent
     }
 
     send(batt_readings)
