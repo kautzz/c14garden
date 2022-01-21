@@ -47,12 +47,15 @@ def read():
     #     if bme.data.heat_stable:
     #         readings['gas_resistance'] = bme.data.gas_resistance
     print("Gain before read: " + str(ads.getGain()))
+    ads.setGain(0)
 
     diff_adc_1 = ads.readADC_Differential_0_1()
     battery_voltage = ads.toVoltage(diff_adc_1)
+    ads.setGain(0)
 
     diff_adc_2 = ads.readADC_Differential_2_3()
     light_intensity = ads.toVoltage(diff_adc_2)
+    ads.setGain(0)
 
     print("Gain after read: " + str(ads.getGain()))
 
