@@ -19,15 +19,13 @@ config.read('settings.ini')
 client = mqtt.Client(config['mqtt']['pubcli'], False)
 
 def setup_hardware():
-    #sensors.setup_bme()
+    sensors.setup_bme()
     actuators.setup_gpio()
 
 def get_readings():
     print(str(datetime.datetime.now()))
-    sensReadings = sensors.read()
-    actReadings = actuators.read()
-    if sensReadings: print(json.dumps(sensReadings))
-    #if actReadings: print(json.dumps(actReadings))
+    sensors.read()
+    actuators.read()
     print("")
 
 def main():

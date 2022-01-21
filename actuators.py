@@ -48,6 +48,9 @@ def send(readings):
         lastReadings = readings
     else:
         pass
+    
+    print(json.dumps(readings))
+
 
 def set(cmd):
     if cmd['actuator'] == "v1":
