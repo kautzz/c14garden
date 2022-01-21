@@ -46,25 +46,17 @@ def read():
     #     }
     #     if bme.data.heat_stable:
     #         readings['gas_resistance'] = bme.data.gas_resistance
-    ads.setInput(0)
-    ads.setGain(0)
-    print("Gain before read: " + str(ads.getGain()))
-    print("Multiplexer before read: " + str(ads.getInput()))
 
-
-    diff_adc_1 = ads.readADC_Differential_0_1()
-    battery_voltage = ads.toVoltage(diff_adc_1)
-
-    ads.setInput(3)
-    ads.setGain(0)
-    print("Gain after first read: " + str(ads.getGain()))
-    print("Multiplexer after first read: " + str(ads.getInput()))
+    #diff_adc_1 = ads.readADC_Differential_0_1()
+    #battery_voltage = ads.toVoltage(diff_adc_1)
+    diff_adc_1 = 0
+    battery_voltage = 0
 
     diff_adc_2 = ads.readADC_Differential_2_3()
     light_intensity = ads.toVoltage(diff_adc_2)
 
-    print("Gain after second read: " + str(ads.getGain()))
-    print("Multiplexer after second read: " + str(ads.getInput()))
+    print("Gain after read: " + str(ads.getGain()))
+    print("Multiplexer after read: " + str(ads.getInput()))
 
     readings = {
         "sensor": "ADS1115",
