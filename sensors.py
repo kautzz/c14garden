@@ -13,7 +13,6 @@ from configparser import ConfigParser
 bme = bme680.BME680()
 ads = ADS1x15.ADS1115(1)
 
-ads.setInput(3)
 ads.setGain(0)
 ads.setMode(1)
 ads.setDataRate(7)
@@ -41,7 +40,7 @@ def read():
             "sensor": "BME680",
             "temperature": bme.data.temperature,
             "humidity": bme.data.humidity,
-            "pressure": bme.data.pressure,
+            "pressure": bme.data.pressure
         }
         if bme.data.heat_stable:
             bme_readings['gas_resistance'] = bme.data.gas_resistance
@@ -51,7 +50,8 @@ def read():
     # read and send data from ADC
     batt_readings = {
         "sensor": "ADS1115",
-        "battery_voltage": ads.toVoltage(ads.readADC_Differential_0_1())
+        "battery_voltage": ads.toVoltage(ads.readADC_Differential_0_1()),
+        "light_intensity": (ads.toVoltage(ads.readADC_Differential_2_3())) / 0.05 #divide by VCC to get percent
     }
 
     send(batt_readings)
