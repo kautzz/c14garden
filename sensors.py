@@ -12,7 +12,7 @@ ads = ADS1x15.ADS1115(1)
 
 #ads.setInput(0)
 #ads.setGain(0)
-#ads.setMode(1)
+ads.setMode(1)
 #ads.setDataRate(7)
 
 import paho.mqtt.client as mqtt
