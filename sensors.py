@@ -52,6 +52,9 @@ def read():
     diff_adc_1 = 0
     battery_voltage = 0
 
+    ads.setInput(3)
+    ads.setGain(0)
+
     diff_adc_2 = ads.readADC_Differential_2_3()
     light_intensity = ads.toVoltage(diff_adc_2)
 
