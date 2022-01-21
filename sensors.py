@@ -15,6 +15,9 @@ ads.setGain(0)
 #ads.setMode(1)
 #ads.setDataRate(7)
 
+print("Gain setup: " + str(ads.getGain()))
+print("Multiplexer setup: " + str(ads.getInput()))
+
 import paho.mqtt.client as mqtt
 import json
 
@@ -54,6 +57,9 @@ def read():
 
     ads.setInput(3)
     ads.setGain(0)
+
+    print("Gain before read: " + str(ads.getGain()))
+    print("Multiplexer before read: " + str(ads.getInput()))
 
     diff_adc_2 = ads.readADC_Differential_2_3()
     light_intensity = ads.toVoltage(diff_adc_2)
