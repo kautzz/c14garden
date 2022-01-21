@@ -23,11 +23,11 @@ def setup_hardware():
     actuators.setup_gpio()
 
 def get_readings():
+    print(str(datetime.datetime.now()))
     sensReadings = sensors.read()
     actReadings = actuators.read()
-    print(str(datetime.datetime.now()))
     if sensReadings: print(json.dumps(sensReadings))
-    if actReadings: print(json.dumps(actReadings))
+    #if actReadings: print(json.dumps(actReadings))
     print("")
 
 def main():
