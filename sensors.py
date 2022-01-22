@@ -50,8 +50,8 @@ def read():
     # read and send data from ADC
     batt_readings = {
         "sensor": "ADS1115",
-        "battery_voltage": round(ads.toVoltage(ads.readADC_Differential_0_1()), 2),
-        "light_intensity": round((ads.toVoltage(ads.readADC_Differential_2_3())) / 0.05, 2) #divide by VCC to get percent
+        "battery_voltage": round(ads.toVoltage(ads.readADC_Differential_0_1()) * 2, 2), #multiply by 2 because of voltage divider
+        "light_intensity": round((ads.toVoltage(ads.readADC_Differential_2_3())) / 0.033, 2) #divide by VCC to get percent
     }
 
     send(batt_readings)
