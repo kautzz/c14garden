@@ -21,7 +21,7 @@ class RelayBoard(object):
 
     def __init__(self, device, pin, inverted):
         self._registry.append(self)
-        self.pin = LED(pin)
+        self._pin = LED(pin)
         self.device = device
         self.gpio = pin
         self.inverted = inverted
@@ -59,7 +59,7 @@ def send():
     try:
         client.connect("192.168.1.100",1883,60)
         for channel in RelayBoard._registry:
-            client.publish("growbed1/actuators", json.dumps(channel, default=lambda x: x.__dict__))
+            client.publish("growbed1/actuators", json.dumps(channel, default=lambda x: x._asdict)
 
             #client.publish("growbed1/actuators", json.dumps(channel))
             print(channel)
