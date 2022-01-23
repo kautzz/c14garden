@@ -21,11 +21,11 @@ class RelayBoard(object):
 
     def __init__(self, device, pin, inverted):
         self._registry.append(self)
+        self._pin = LED(pin)
         self.device = device
         self.gpio = pin
         self.inverted = inverted
         self.status = False
-        self._pin = LED(pin)
 
     def activate(self):
         if self.inverted: self._pin.off()
@@ -34,6 +34,10 @@ class RelayBoard(object):
     def deactivate(self):
         if self.inverted: self._pin.on()
         else: self._pin.off()
+
+    def read(self):
+        if self.inverted: self.status = not self._pin.value
+        else: self.status = self._pin.value
 
 ch1 = RelayBoard("valve", 18, True)
 ch2 = RelayBoard("nc", 22, True)
@@ -45,9 +49,8 @@ def setup():
 
 def read():
 
-    ch1.status = not ch1.pin.value
-    ch2.status = not ch2.pin.value
-
+    ch1.read()
+    ch2.read()
 
     send()
     return()
