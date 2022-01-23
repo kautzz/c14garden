@@ -62,8 +62,8 @@ def send():
     try:
         client.connect("192.168.1.100",1883,60)
         for channel in RelayBoard._registry:
-            client.publish("growbed1/actuators", json.dumps(channel))
-            print(json.dumps(channel))
+            #client.publish("growbed1/actuators", json.dumps(channel))
+            print(channel)
         client.disconnect()
 
     except Exception as e:
