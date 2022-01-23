@@ -19,9 +19,8 @@ config.read('settings.ini')
 client = mqtt.Client(config['mqtt']['pubcli'], False)
 
 def setup_hardware():
-    sensors.setup_bme()
-    sensors.setup_isl()
-    actuators.setup_gpio()
+    sensors.setup()
+    actuators.setup()
 
 def get_readings():
     print(str(datetime.datetime.now()))
