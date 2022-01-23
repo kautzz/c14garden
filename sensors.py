@@ -85,9 +85,9 @@ def read():
     }
 
     # Output data to the screen
-    print "Green Color luminance : %d lux" %green
-    print "Red Color luminance : %d lux" %red
-    print "Blue Color luminance : %d lux" %blue
+    print("Green Color luminance : %d lux" %green)
+    print("Red Color luminance : %d lux" %red)
+    print("Blue Color luminance : %d lux" %blue)
 
     send(isl_readings)
 
