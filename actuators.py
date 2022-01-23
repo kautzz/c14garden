@@ -59,7 +59,7 @@ def send():
     try:
         client.connect("192.168.1.100",1883,60)
         for channel in RelayBoard._registry:
-            client.publish("growbed1/actuators", json.dumps(vars(channel)))
+            client.publish("growbed1/actuators", json.dumps(channel, default=lambda x: x.__dict__))
 
             #client.publish("growbed1/actuators", json.dumps(channel))
             print(channel)
