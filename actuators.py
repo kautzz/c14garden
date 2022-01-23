@@ -26,9 +26,9 @@ class RelayBoard(object):
     def __init__(self, device, pin, status):
         self._registry.append(self)
         self.device = device
-        self.pin = pin
+        self.gpio = pin
         self.status = status
-        self.turn = LED(pin)
+        self.pin = LED(pin)
 
 ch1 = RelayBoard("valve", 18, False)
 ch2 = RelayBoard("nc", 22, False)
@@ -46,13 +46,13 @@ def deactivate(device):
     read()
 
 def setup():
-    ch1.turn.on() # inverted!
-    ch2.turn.on() # inverted!
+    ch1.pin.on() # inverted!
+    ch2.pin.on() # inverted!
 
 def read():
 
-    ch1.status = not ch1_pin.value
-    ch2.status = not ch2_pin.value
+    ch1.status = not ch1.pin.value
+    ch2.status = not ch2.pin.value
 
 
     send()
