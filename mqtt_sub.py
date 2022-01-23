@@ -26,9 +26,9 @@ def on_message(client, userdata, msg):
     # {'actuator': 'v1', 'active': True}
     # change settings of individual sensors remotely
     # {'sensor': 'BME680', ...}
-    print(client)
-    print(userdata)
-    print(msg)
+    print(client.payload)
+    print(userdata.payload)
+    print(msg.payload)
 
 
     msg_decode=str(msg.payload.decode("utf-8","ignore"))
