@@ -12,6 +12,8 @@ import json
 from configparser import ConfigParser
 
 bme = bme680.BME680()
+bus = smbus.SMBus(1)
+
 ads = ADS1x15.ADS1115(1)
 
 ads.setGain(0)
@@ -25,10 +27,7 @@ client = mqtt.Client(config['mqtt']['pubcli'], False)
 
 
 def setup_isl():
-    # Get I2C bus
-    bus = smbus.SMBus(1)
-
-    # ISL29125 address, 0x44(68)
+     # ISL29125 address, 0x44(68)
     # Select configuation-1register, 0x01(01)
     # 0x0D(13) Operation: RGB, Range: 10000 lux, Res: 16 Bits
     bus.write_byte_data(0x44, 0x01, 0x0D)
