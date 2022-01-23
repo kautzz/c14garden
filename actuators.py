@@ -29,6 +29,7 @@ class RelayBoard(object):
     def __init__(self, device, pin, status):
         self._registry.append(self)
         self.device = device
+        self.LED(pin)
         self.pin = pin
         self.status = status
 
@@ -36,8 +37,8 @@ class RelayBoard(object):
 ch1 = RelayBoard("valve", 18, False)
 ch2 = RelayBoard("nc", 22, False)
 
-ch1_pin = LED(ch1.pin)
-ch2_pin = LED(ch2.pin)
+#ch1_pin = LED(ch1.pin)
+#ch2_pin = LED(ch2.pin)
 
 # relay board has reversed input, 0 is on...
 def activate(device):
