@@ -41,7 +41,9 @@ class RelayBoard(object):
 
     def tojson(self):
         source = {
-            self.device : self.status,
+            #self.device : self.status,
+            "status" : self.status,
+
             "reg": self._registry,
             "gpio": self.gpio,
             "inv": self.inverted,
