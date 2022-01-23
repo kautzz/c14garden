@@ -39,6 +39,15 @@ class RelayBoard(object):
         if self.inverted: self.status = not self._pin.value
         else: self.status = self._pin.value
 
+    def tojson(self):
+        source = {
+            self.device : self.active,
+            "reg": self._registry,
+            "gpio": self.gpio,
+            "inv": self.inverted,
+        }
+        return(json.dumps(source))
+
 ch1 = RelayBoard("valve", 18, True)
 ch2 = RelayBoard("nc", 22, True)
 
@@ -59,7 +68,7 @@ def send():
     try:
         client.connect("192.168.1.100",1883,60)
         for channel in RelayBoard._registry:
-            client.publish("growbed1/actuators", json.dumps(channel, default=lambda x: x.__dict__))
+            client.publish("growbed1/actuators", channel.tojson())
 
             #client.publish("growbed1/actuators", json.dumps(channel))
             print(channel)
