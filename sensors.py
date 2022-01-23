@@ -96,5 +96,5 @@ def send(readings):
         print(e)
         time.sleep(10)
         client.connect("192.168.1.100",1883,60)
-        client.publish("growbed1/errors", '{"sensor_send": 'e'}')
+        client.publish("growbed1/errors", '{"sensor_send": ' + e + '}')
         client.disconnect()
