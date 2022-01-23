@@ -74,10 +74,11 @@ def send():
 
 
 def set(cmd):
-    if cmd['actuator'] == "ch1":
-        if cmd['active'] == True:
-            activate(valve1)
-        elif cmd['active'] == False:
-            deactivate(valve1)
-
-    elif cmd['actuator']
+    # if cmd['actuator'] == "ch1":
+    #     if cmd['active'] == True:
+    #         activate(valve1)
+    #     elif cmd['active'] == False:
+    #         deactivate(valve1)
+    #
+    # elif cmd['actuator']
+    pass
