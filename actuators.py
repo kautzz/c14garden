@@ -20,11 +20,11 @@ lastReadings = 0
 
 class IterRegistry(type):
     def __iter__(cls):
-        return iter(cls._reg)
+        return iter(cls._registry)
 
 class RelayBoard(object):
     __metaclass__ = IterRegistry
-    _reg = []
+    _registry = []
 
     def __init__(self, device, pin, status):
         self._registry.append(self)
