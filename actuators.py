@@ -33,8 +33,8 @@ class RelayBoard(object):
         self.status = status
 
 
-ch1 = RelayBoard("valve", 18, false)
-ch2 = RelayBoard("nc", 22, false)
+ch1 = RelayBoard("valve", 18, False)
+ch2 = RelayBoard("nc", 22, False)
 
 ch1_pin = LED(ch1.pin)
 ch2_pin = LED(ch2.pin)
