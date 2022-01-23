@@ -42,7 +42,6 @@ class RelayBoard(object):
     def tojson(self):
         source = {
             self.device : self.status,
-            #"status" : self.status,
             "gpio": self.gpio,
             "inv": self.inverted,
         }
@@ -53,24 +52,19 @@ ch2 = RelayBoard("nc", 22, True)
 
 
 def setup():
-    ch1.deactivate()
-    ch2.deactivate()
+    for channel in RelayBoard._registry:
+        channel.deactivate()
 
 def read():
-
-    ch1.read()
-    ch2.read()
-
+    for channel in RelayBoard._registry:
+        channel.read()
     send()
-    return()
 
 def send():
     try:
         client.connect("192.168.1.100",1883,60)
         for channel in RelayBoard._registry:
             client.publish("growbed1/actuators", channel.tojson())
-
-            #client.publish("growbed1/actuators", json.dumps(channel))
             print(channel.tojson())
         client.disconnect()
 
