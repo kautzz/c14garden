@@ -15,39 +15,33 @@ config.read('settings.ini')
 
 client = mqtt.Client(config['mqtt']['pubcli'], False)
 
-# class IterRegistry(type):
-#     def __iter__(cls):
-#         return iter(cls._registry)
-
 class RelayBoard(object):
     #__metaclass__ = IterRegistry
     _registry = []
 
-    def __init__(self, device, pin, status):
+    def __init__(self, device, pin, inverted):
         self._registry.append(self)
         self.device = device
         self.gpio = pin
-        self.status = status
+        self.inverted = inverted
+        self.status = False
         self._pin = LED(pin)
 
-ch1 = RelayBoard("valve", 18, False)
-ch2 = RelayBoard("nc", 22, False)
+    def activate(self):
+        if self.inverted: self._pin.off()
+        else: self._pin.on()
 
-#ch1_pin = LED(ch1.pin)
-#ch2_pin = LED(ch2.pin)
+    def deactivate(self):
+        if self.inverted: self._pin.on()
+        else: self._pin.off()
 
-# relay board has reversed input, 0 is on...
-def activate(device):
-    device.off()
-    read()
+ch1 = RelayBoard("valve", 18, True)
+ch2 = RelayBoard("nc", 22, True)
 
-def deactivate(device):
-    device.on()
-    read()
 
 def setup():
-    ch1.pin.on() # inverted!
-    ch2.pin.on() # inverted!
+    ch1.deactivate()
+    ch2.deactivate()
 
 def read():
 
