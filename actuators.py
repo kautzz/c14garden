@@ -21,7 +21,7 @@ class RelayBoard(object):
 
     def __init__(self, device, pin, inverted):
         self._registry.append(self)
-        self._pin = LED(pin)
+        self.pin = LED(pin)
         self.device = device
         self.gpio = pin
         self.inverted = inverted
