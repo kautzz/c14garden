@@ -15,9 +15,6 @@ config.read('settings.ini')
 
 client = mqtt.Client(config['mqtt']['pubcli'], False)
 
-
-lastReadings = 0
-
 class IterRegistry(type):
     def __iter__(cls):
         return iter(cls._registry)
@@ -29,10 +26,9 @@ class RelayBoard(object):
     def __init__(self, device, pin, status):
         self._registry.append(self)
         self.device = device
-        self.LED(pin)
         self.pin = pin
         self.status = status
-
+        self.turn = LED(pin)
 
 ch1 = RelayBoard("valve", 18, False)
 ch2 = RelayBoard("nc", 22, False)
@@ -50,8 +46,8 @@ def deactivate(device):
     read()
 
 def setup():
-    ch1.on() # inverted!
-    ch2.on() # inverted!
+    ch1.turn.on() # inverted!
+    ch2.turn.on() # inverted!
 
 def read():
 
