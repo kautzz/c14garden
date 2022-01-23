@@ -20,6 +20,7 @@ client = mqtt.Client(config['mqtt']['pubcli'], False)
 
 def setup_hardware():
     sensors.setup_bme()
+    sensors.setup_isl()
     actuators.setup_gpio()
 
 def get_readings():
