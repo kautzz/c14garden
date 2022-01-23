@@ -28,7 +28,7 @@ class RelayBoard(object):
         self.device = device
         self.gpio = pin
         self.status = status
-        _self.pin = LED(pin)
+        self._pin = LED(pin)
 
 ch1 = RelayBoard("valve", 18, False)
 ch2 = RelayBoard("nc", 22, False)
