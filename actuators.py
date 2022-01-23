@@ -41,12 +41,10 @@ class RelayBoard(object):
 
     def tojson(self):
         source = {
-            #self.device : self.status,
-            "status" : self.status,
-
-            ##"reg": self._registry,
-            #"gpio": self.gpio,
-            #"inv": self.inverted,
+            self.device : self.status,
+            #"status" : self.status,
+            "gpio": self.gpio,
+            "inv": self.inverted,
         }
         return(json.dumps(source))
 
@@ -73,7 +71,7 @@ def send():
             client.publish("growbed1/actuators", channel.tojson())
 
             #client.publish("growbed1/actuators", json.dumps(channel))
-            print(channel)
+            print(channel.tojson())
         client.disconnect()
 
     except Exception as e:
