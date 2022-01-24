@@ -106,7 +106,7 @@ def set(message):
                     and message["duration"] == interval["duration"]
                     and message["amount"] == interval["amount"]):
 
-                    print("maaaaaatch!!!" + interval)
+                    print("maaaaaatch!!!")
                     remove(interval)
 
             # if message["duration"] and message["amount"]:
