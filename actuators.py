@@ -80,7 +80,7 @@ def setup():
 def read():
     for channel in RelayBoard._registry:
         channel.read()
-    send()
+        channel.send()
 
 def set(message):
     for channel in RelayBoard._registry:
