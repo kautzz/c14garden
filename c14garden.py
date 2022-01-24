@@ -23,11 +23,11 @@ def setup_hardware():
     actuators.setup()
 
 def get_readings():
-    print(str(datetime.datetime.now()))
-    print("-----------------------------------------------")
+    print("--------------------------------------------")
+    print("▼▼▼ " + str(datetime.datetime.now()) + " ▼▼▼")
+    print("--------------------------------------------")
     sensors.read()
     actuators.read()
-    print("")
 
 def main():
     lastRead = datetime.datetime.now().timestamp() * -1
