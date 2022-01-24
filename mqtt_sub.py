@@ -40,7 +40,6 @@ def on_message(client, userdata, msg):
             pass
 
         elif msg.topic == 'growbed1/actuator':
-            print("goto act set")
             actuators.set(msg_in)
 
         elif msg.topic == "growbed1/system":
