@@ -88,8 +88,8 @@ class ADS(Sensor):
         self.driver.setDataRate(7)
 
     def read(self):
-        self.battery_voltage = round(ads.toVoltage(ads.readADC_Differential_0_1()) * 2, 2), #multiply by 2 because of voltage divider
-        self.light_intensity = round((ads.toVoltage(ads.readADC_Differential_2_3())) / 0.033, 2) #divide by VCC to get percent
+        self.battery_voltage = round(self.driver.toVoltage(self.driver.readADC_Differential_0_1()) * 2, 2), #multiply by 2 because of voltage divider
+        self.light_intensity = round((self.driver.toVoltage(self.driver.readADC_Differential_2_3())) / 0.033, 2) #divide by VCC to get percent
 
     def tojson(self):
         source = {
