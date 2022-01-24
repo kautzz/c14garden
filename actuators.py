@@ -64,6 +64,8 @@ class RelayBoard(object):
             except Exception as e:
                 print(e)
 
+            self.last_status = self.status
+
     def set(self, status):
         if status == True:
             self.activate()
