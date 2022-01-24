@@ -105,8 +105,8 @@ def set(message):
                 if (day == list(interval.keys())[0]
                     and message.duration == interval.duration
                     and message.amount == interval.amount):
-                    
-                print("maaaaaatch!!!")
+
+                    print("maaaaaatch!!!")
 
             # if message["duration"] and message["amount"]:
             #     print("schedule " + key + " match!" )
