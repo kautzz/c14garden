@@ -22,8 +22,8 @@ def get_readings():
     print("--------------------------------------")
     print("  ▼▼▼ " + str(datetime.datetime.now()) + " ▼▼▼  ")
     print("--------------------------------------")
-    sensors.read()
-    actuators.read()
+    sensors.update()
+    actuators.update()
 
 def main():
     lastRead = datetime.datetime.now().timestamp() * -1

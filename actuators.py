@@ -76,7 +76,7 @@ class RelayBoard(object):
 ch1 = RelayBoard("valve", 18, True)
 ch2 = RelayBoard("nc", 23, True)
 
-def read():
+def update():
     for channel in RelayBoard._registry:
         channel.read()
         channel.send()

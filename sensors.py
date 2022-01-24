@@ -142,7 +142,7 @@ class ISL(Sensor):
 
 isl = ISL("ISL29125")
 
-def read():
+def update():
     for sensor in Sensor._registry:
         sensor.read()
         sensor.send()

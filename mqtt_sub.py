@@ -24,12 +24,6 @@ def on_connect(client, userdata, flags, rc):
         ])
 
 def on_message(client, userdata, msg):
-    global systemcmd
-    # control actuators remotely
-    # {'actuator': 'v1', 'active': True}
-    # change settings of individual sensors remotely
-    # {'sensor': 'BME680', ...}
-
     msg_decode=str(msg.payload.decode("utf-8","ignore"))
     try:
         msg_in=json.loads(msg_decode)
@@ -44,9 +38,7 @@ def on_message(client, userdata, msg):
             systemfcts.set(msg_in)
 
     except Exception as e:
-        print("Invalid Message Format!")
         print(e)
-
 
 def get_messages():
     client.on_connect = on_connect
