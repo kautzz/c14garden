@@ -85,7 +85,8 @@ def send():
 def set(message):
     for channel in RelayBoard._registry:
         key = list(message.keys())[0]
-        if channel.device == key:
+        print(key)
+        if channel.device in key:
             channel.set(message.key)
 
     # if cmd['actuator'] == "ch1":
