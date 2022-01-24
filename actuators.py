@@ -49,7 +49,7 @@ class RelayBoard(object):
         source = {
             self.device : self.status,
             "gpio": self.gpio,
-            "inv": self.inverted,
+            "inv": self.inverted
         }
         return(json.dumps(source))
 
