@@ -25,16 +25,21 @@ class RelayBoard(object):
         self.gpio = pin
         self.inverted = inverted
         self.status = False
+        self.last_status = False
 
     def activate(self):
         if self.inverted: self._pin.off()
         else: self._pin.on()
+        self.last_status = self.status
         self.read()
+        self.send()
 
     def deactivate(self):
         if self.inverted: self._pin.on()
         else: self._pin.off()
+        self.last_status = self.status
         self.read()
+        self.send()
 
     def read(self):
         if self.inverted: self.status = not self._pin.value
@@ -49,22 +54,21 @@ class RelayBoard(object):
         return(json.dumps(source))
 
     def send(self):
-        try:
-            client.connect("192.168.1.100",1883,60)
-            client.publish("growbed1/actuators", self.tojson())
-            print(self.tojson())
-            client.disconnect()
+        if self.last_status != self.status:
+            try:
+                client.connect("192.168.1.100",1883,60)
+                client.publish("growbed1/actuators", self.tojson())
+                print(self.tojson())
+                client.disconnect()
 
-        except Exception as e:
-            print(e)
+            except Exception as e:
+                print(e)
 
     def set(self, status):
         if status == True:
             self.activate()
         elif status == False:
             self.deactivate()
-        self.send()
-
 
 ch1 = RelayBoard("valve", 18, True)
 ch2 = RelayBoard("nc", 23, True)
@@ -77,10 +81,6 @@ def read():
     for channel in RelayBoard._registry:
         channel.read()
     send()
-
-def send():
-    for channel in RelayBoard._registry:
-        channel.send()
 
 def set(message):
     for channel in RelayBoard._registry:
