@@ -102,10 +102,11 @@ def set(message):
         elif key == channel.device and message[key] == "deschedule":
             day = list(message.keys())[1]
             for interval in channel.schedule:
-                if day == list(interval.keys())[0]
+                if (day == list(interval.keys())[0]
                     and message.duration == interval.duration
-                    and message.amount == interval.amount:
-                        print("maaaaaatch!!!")
+                    and message.amount == interval.amount):
+                    
+                print("maaaaaatch!!!")
 
             # if message["duration"] and message["amount"]:
             #     print("schedule " + key + " match!" )
