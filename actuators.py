@@ -6,6 +6,7 @@ Garden automation, controlling actuators.
 
 from gpiozero import LED
 from time import sleep
+from datetime import datetime
 import paho.mqtt.client as mqtt
 import json
 from configparser import ConfigParser
@@ -26,6 +27,7 @@ class RelayBoard(object):
         self.inverted = inverted
         self.status = False
         self.last_status = False
+        self.schedule = []
         self.deactivate()
 
     def activate(self):
@@ -41,6 +43,9 @@ class RelayBoard(object):
         self.last_status = self.status
         self.read()
         self.send()
+
+    def set_schedule(self):
+        pass
 
     def read(self):
         if self.inverted: self.status = not self._pin.value
@@ -84,5 +89,15 @@ def update():
 def set(message):
     for channel in RelayBoard._registry:
         key = list(message.keys())[0]
-        if channel.device == key:
+        if key == "schedule" && channel.device == key:
+            print("schedule " + key + " match!" )
+
+        elif channel.device == key:
             channel.set(message[key])
+
+def check_schedule():
+    day = datetime.today().strftime('%A')
+    print(day)
+    for interval in self.schedule:
+        if interval.list(message.keys())[0] == day:
+            print("matching day")
