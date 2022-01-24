@@ -18,10 +18,6 @@ config.read('settings.ini')
 
 client = mqtt.Client(config['mqtt']['pubcli'], False)
 
-def setup_hardware():
-    sensors.setup()
-    actuators.setup()
-
 def get_readings():
     print("--------------------------------------")
     print("  ▼▼▼ " + str(datetime.datetime.now()) + " ▼▼▼  ")
@@ -31,7 +27,6 @@ def get_readings():
 
 def main():
     lastRead = datetime.datetime.now().timestamp() * -1
-    setup_hardware()
 
     try:
         client.connect("192.168.1.100",1883,60)

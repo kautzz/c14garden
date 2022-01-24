@@ -26,6 +26,7 @@ class RelayBoard(object):
         self.inverted = inverted
         self.status = False
         self.last_status = False
+        self.deactivate()
 
     def activate(self):
         if self.inverted: self._pin.off()
@@ -74,10 +75,6 @@ class RelayBoard(object):
 
 ch1 = RelayBoard("valve", 18, True)
 ch2 = RelayBoard("nc", 23, True)
-
-def setup():
-    for channel in RelayBoard._registry:
-        channel.deactivate()
 
 def read():
     for channel in RelayBoard._registry:

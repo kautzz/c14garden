@@ -14,9 +14,6 @@ from configparser import ConfigParser
 config = ConfigParser()
 config.read('settings.ini')
 
-isl = smbus.SMBus(1)
-ads = ADS1x15.ADS1115(1)
-
 client = mqtt.Client(config['mqtt']['pubcli'], False)
 
 class Sensor(object):
@@ -24,6 +21,7 @@ class Sensor(object):
 
     def __init__(self):
         self._registry.append(self)
+        self.setup()
 
     def send(self):
         try:
@@ -74,77 +72,74 @@ class BME(Sensor):
 
 bme = BME("BME680")
 
+class ADS(Sensor):
+    def __init__(self, device):
+        super().__init__()
+        self.driver = ADS1x15.ADS1115(1)
+        self.device = device
+        self.battery_voltage = 0
+        self.light_intensity = 0
 
-def setup():
-    pass
+    def setup(self):
+        self.driver.setGain(0)
+        self.driver.setMode(1)
+        self.driver.setDataRate(7)
+
+    def read(self):
+        self.battery_voltage = round(ads.toVoltage(ads.readADC_Differential_0_1()) * 2, 2), #multiply by 2 because of voltage divider
+        self.light_intensity = round((ads.toVoltage(ads.readADC_Differential_2_3())) / 0.033, 2) #divide by VCC to get percent
+
+    def tojson(self):
+        source = {
+            "sensor" : self.device,
+            "battery_voltage" : self.device,
+            "light_intensity": self.temperature
+        }
+        return(json.dumps(source))
+
+ads = ADS("ADS1115")
+
+class ISL(Sensor):
+    def __init__(self, device):
+        super().__init__()
+        self.driver = smbus.SMBus(1)
+        self.device = device
+        self.green = 0
+        self.red = 0
+        self.blue = 0
+
+    def setup(self):
+        # ISL29125 address, 0x44(68)
+        # Select configuation-1register, 0x01(01)
+        # 0x0D(13) Operation: RGB, Range: 10000 lux, Res: 16 Bits
+        self.driver.write_byte_data(0x44, 0x01, 0x0D)
+
+    def read(self):
+        # read data from the ISL29125 sensor
+        # Read data back from 0x09(9), 6 bytes
+        # Green LSB, Green MSB, Red LSB, Red MSB, Blue LSB, Blue MSB
+        data = self.driver.read_i2c_block_data(0x44, 0x09, 6)
+        green = data[1] * 256 + data[0]
+        red = data[3] * 256 + data[2]
+        blue = data[5] * 256 + data[4]
+
+        self.green = green
+        self.red = red
+        self.blue = blue
+
+    def tojson(self):
+        source = {
+            "sensor" : self.device,
+            "light_green" : self.green,
+            "light_red": self.red,
+            "light_blue": self.blue
+
+        }
+        return(json.dumps(source))
+
+isl = ISL("ISL29125")
 
 def read():
     for sensor in Sensor._registry:
         sensor.read()
         sensor.send()
-
-#
-# def setup():
-#     setup_ads()
-#     setup_isl()
-#
-# def setup_ads():
-#     ads.setGain(0)
-#     ads.setMode(1)
-#     ads.setDataRate(7)
-#
-# def setup_isl():
-#     # ISL29125 address, 0x44(68)
-#     # Select configuation-1register, 0x01(01)
-#     # 0x0D(13) Operation: RGB, Range: 10000 lux, Res: 16 Bits
-#     isl.write_byte_data(0x44, 0x01, 0x0D)
-#
-#
-# def read():
-#
-#     # read data from BME senor
-#     if bme.get_sensor_data():
-#         bme_readings = {
-#             "sensor": "BME680",
-#             "temperature": round(bme.data.temperature, 2),
-#             "humidity": round(bme.data.humidity, 2),
-#             "pressure": round(bme.data.pressure, 2)
-#         }
-#         if bme.data.heat_stable:
-#             bme_readings['gas_resistance'] = round(bme.data.gas_resistance)
-#         send(bme_readings)
-#
-#     # read data from ADC
-#     batt_readings = {
-#         "sensor": "ADS1115",
-#         "battery_voltage": round(ads.toVoltage(ads.readADC_Differential_0_1()) * 2, 2), #multiply by 2 because of voltage divider
-#         "light_intensity": round((ads.toVoltage(ads.readADC_Differential_2_3())) / 0.033, 2) #divide by VCC to get percent
-#     }
-#     send(batt_readings)
-#
-#     # read data from the ISL29125 sensor
-#     # Read data back from 0x09(9), 6 bytes
-#     # Green LSB, Green MSB, Red LSB, Red MSB, Blue LSB, Blue MSB
-#     data = isl.read_i2c_block_data(0x44, 0x09, 6)
-#     green = data[1] * 256 + data[0]
-#     red = data[3] * 256 + data[2]
-#     blue = data[5] * 256 + data[4]
-#
-#     isl_readings = {
-#         "sensor": "ISL29125",
-#         "light_green": green,
-#         "light_red": red,
-#         "light_blue": blue
-#     }
-#     send(isl_readings)
-#
-#     return()
-#
-# def send(readings):
-#     try:
-#         client.connect("192.168.1.100",1883,60)
-#         client.publish("growbed1/sensors", json.dumps(readings))
-#         client.disconnect()
-#         print(json.dumps(readings))
-#     except Exception as e:
-#         print(e)
