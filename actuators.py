@@ -87,7 +87,7 @@ def set(message):
         key = list(message.keys())[0]
         print(key)
         if channel.device in key:
-            channel.set(message.key)
+            channel.set(message[key])
 
     # if cmd['actuator'] == "ch1":
     #     if cmd['active'] == True:
