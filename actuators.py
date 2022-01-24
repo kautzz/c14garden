@@ -104,7 +104,7 @@ def set(message):
             for interval in channel.schedule:
                 if (day == list(interval.keys())[0]
                     and message["duration"] == interval["duration"]
-                    and message["amount"] == interval["amount"]]):
+                    and message["amount"] == interval["amount"]):
 
                     print("maaaaaatch!!!")
 
