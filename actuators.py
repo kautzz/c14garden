@@ -91,12 +91,12 @@ def update():
 def set(message):
     for channel in RelayBoard._registry:
         key = list(message.keys())[0]
-        if key == "schedule" and channel.device == message[key]:
+        if key == channel.device and message[key] == "schedule":
             if message["duration"] and message["amount"]:
                 print("schedule " + key + " match!" )
                 channel.schedule.append(message)
 
-        elif channel.device == key:
+        elif key == channel.device:
             channel.set(message[key])
 
 def check_schedule():
