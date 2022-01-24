@@ -35,13 +35,14 @@ class Sensor(object):
 
 class BME(Sensor):
     def __init__(self, device):
-        super().__init__()
         self.driver = bme680.BME680()
         self.device = device
         self.temperature = 0
         self.humidity = 0
         self.pressure = 0
         self.gas_resistance = 0
+        super().__init__()
+
 
     def setup(self):
         self.driver.set_gas_status(bme680.ENABLE_GAS_MEAS)
@@ -74,11 +75,12 @@ bme = BME("BME680")
 
 class ADS(Sensor):
     def __init__(self, device):
-        super().__init__()
         self.driver = ADS1x15.ADS1115(1)
         self.device = device
         self.battery_voltage = 0
         self.light_intensity = 0
+        super().__init__()
+
 
     def setup(self):
         self.driver.setGain(0)
@@ -101,12 +103,13 @@ ads = ADS("ADS1115")
 
 class ISL(Sensor):
     def __init__(self, device):
-        super().__init__()
         self.driver = smbus.SMBus(1)
         self.device = device
         self.green = 0
         self.red = 0
         self.blue = 0
+        super().__init__()
+
 
     def setup(self):
         # ISL29125 address, 0x44(68)
