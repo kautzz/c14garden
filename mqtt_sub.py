@@ -40,6 +40,7 @@ def on_message(client, userdata, msg):
             pass
 
         elif msg.topic == 'actuators':
+            print("goto act set")
             actuators.set(msg_in)
 
         elif msg.topic == "system":
