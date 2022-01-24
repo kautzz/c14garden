@@ -36,14 +36,14 @@ def on_message(client, userdata, msg):
         msg_in=json.loads(msg_decode)
         print(msg.topic)
 
-        if msg.topic == 'sensors':
+        if msg.topic == 'growbed1/sensors':
             pass
 
-        elif msg.topic == 'actuators':
+        elif msg.topic == 'growbed1/actuators':
             print("goto act set")
             actuators.set(msg_in)
 
-        elif msg.topic == "system":
+        elif msg.topic == "growbed1/system":
             pass
 
     except Exception as e:
