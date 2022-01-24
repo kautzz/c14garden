@@ -94,6 +94,7 @@ def set(message):
         if key == channel.device and message[key] == "schedule":
             if message["duration"] and message["amount"]:
                 print("schedule " + key + " match!" )
+                del message[key]
                 channel.schedule.append(message)
 
         elif key == channel.device:
