@@ -19,8 +19,8 @@ client = mqtt.Client(config['mqtt']['subcli'], False)
 def on_connect(client, userdata, flags, rc):
     client.subscribe([
             ("growbed1/system/set", 1),
-            ("growbed1/sensor/set", 1),
-            ("growbed1/actuator/set", 1)
+            ("growbed1/sensors/set", 1),
+            ("growbed1/actuators/set", 1)
         ])
 
 def on_message(client, userdata, msg):
@@ -34,10 +34,10 @@ def on_message(client, userdata, msg):
     try:
         msg_in=json.loads(msg_decode)
 
-        if msg.topic == 'growbed1/sensor/set':
+        if msg.topic == 'growbed1/sensors/set':
             pass
 
-        elif msg.topic == 'growbed1/actuator/set':
+        elif msg.topic == 'growbed1/actuators/set':
             actuators.set(msg_in)
 
         elif msg.topic == "growbed1/system/set":
