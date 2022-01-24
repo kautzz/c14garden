@@ -30,9 +30,9 @@ def set(cmd):
         print("Halting Now!")
         #os.system("sleep 3 && sudo halt")
 
-    elif cmd['system'] == "kill":
+    if cmd['client'] == "kill":
         client.connect("192.168.1.100",1883,60)
         client.publish("growbed1/system", '{"sysmsg": "kill"}')
         client.disconnect()
         print("Killing Myself!")
-        os.system("sleep 3 && killall python3")
+        os.system("sleep 3 && killall python3 &")
