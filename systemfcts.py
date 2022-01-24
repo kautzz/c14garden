@@ -28,7 +28,7 @@ def set(cmd):
         client.publish("growbed1/system", '{"sysmsg": "halt"}')
         client.disconnect()
         print("Halting Now!")
-        os.system("sleep 3 && sudo halt")
+        #os.system("sleep 3 && sudo halt")
 
     elif cmd['system'] == "kill":
         client.connect("192.168.1.100",1883,60)
