@@ -25,7 +25,7 @@ class RelayBoard(object):
         self.gpio = pin
         self.inverted = inverted
         self.status = False
-        self.last_status = True
+        self.last_status = False
 
     def activate(self):
         if self.inverted: self._pin.off()
