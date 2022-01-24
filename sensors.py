@@ -79,7 +79,7 @@ def setup():
     pass
 
 def read():
-    for sensor in Sensors._registry:
+    for sensor in Sensor._registry:
         sensor.read()
         sensor.send()
 
