@@ -24,7 +24,7 @@ def setup_hardware():
 
 def get_readings():
     print("----------------------------------------")
-    print("   ▼▼▼ " + str(datetime.datetime.now()) + " ▼▼▼")
+    print("█  ▼▼▼ " + str(datetime.datetime.now()) + " ▼▼▼  █")
     print("----------------------------------------")
     sensors.read()
     actuators.read()
