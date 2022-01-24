@@ -94,8 +94,8 @@ class ADS(Sensor):
     def tojson(self):
         source = {
             "sensor" : self.device,
-            "battery_voltage" : self.device,
-            "light_intensity": self.temperature
+            "battery_voltage" : self.battery_voltage,
+            "light_intensity": self.light_intensity
         }
         return(json.dumps(source))
 
