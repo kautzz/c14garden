@@ -41,7 +41,7 @@ def on_message(client, userdata, msg):
             actuators.set(msg_in)
 
         elif msg.topic == "growbed1/system/set":
-            pass
+            systemfcts.set(msg_in)
 
     except Exception as e:
         print("Invalid Message Format!")
