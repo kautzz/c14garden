@@ -89,6 +89,7 @@ def update():
 def set(message):
     for channel in RelayBoard._registry:
         key = list(message.keys())[0]
+        print(key)
         if key == "schedule" and channel.device == key:
             print("schedule " + key + " match!" )
 
