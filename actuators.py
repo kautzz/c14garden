@@ -106,7 +106,7 @@ def set(message):
                     and message["duration"] == interval["duration"]
                     and message["amount"] == interval["amount"]):
 
-                    print("maaaaaatch!!!" + value)
+                    print("maaaaaatch!!!" + interval)
 
             # if message["duration"] and message["amount"]:
             #     print("schedule " + key + " match!" )
