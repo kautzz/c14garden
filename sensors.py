@@ -19,7 +19,7 @@ ads = ADS1x15.ADS1115(1)
 
 client = mqtt.Client(config['mqtt']['pubcli'], False)
 
-class Sensor(Object):
+class Sensor(object):
     _registry = []
 
     def __init__(self):
