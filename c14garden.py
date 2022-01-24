@@ -46,7 +46,7 @@ def main():
                 get_readings()
                 lastRead = datetime.datetime.now().timestamp()
 
-            mqtt_sub.get_commands()
+            mqtt_sub.get_messages()
 
     except KeyboardInterrupt:
         pass

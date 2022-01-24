@@ -14,11 +14,14 @@ config = ConfigParser()
 config.read('settings.ini')
 
 client = mqtt.Client(config['mqtt']['subcli'], False)
-systemcmd = False
 
 # The callback for when the client connects to the broker
 def on_connect(client, userdata, flags, rc):
-    client.subscribe("growbed1/cmd", 1)
+    client.subscribe([
+            ("growbed1/system", 1),
+            ("growbed1/sensors", 1),
+            ("growbed1/actuators", 1)
+        ])
 
 def on_message(client, userdata, msg):
     global systemcmd
@@ -26,44 +29,31 @@ def on_message(client, userdata, msg):
     # {'actuator': 'v1', 'active': True}
     # change settings of individual sensors remotely
     # {'sensor': 'BME680', ...}
-    print(client.payload)
-    print(userdata.payload)
-    print(msg.payload)
-
 
     msg_decode=str(msg.payload.decode("utf-8","ignore"))
     print(">>> Command Received", msg_decode)
     try:
         msg_in=json.loads(msg_decode)
-        firstKey = list(msg_in.keys())[0]
+        print(msg.topic)
 
-        if firstKey == 'sensor':
+        if msg.topic == 'sensors':
             pass
 
-        elif firstKey == 'system':
-            systemcmd = msg_in
-
-        elif firstKey == "actuator":
+        elif msg.topic == 'actuators':
             actuators.set(msg_in)
 
-        else:
-            print("Unknown Command!")
+        elif msg.topic == "system":
+            pass
 
     except Exception as e:
         print("Invalid Message Format!")
         print(e)
 
 
-def get_commands():
-    global systemcmd
+def get_messages():
     client.on_connect = on_connect
     client.on_message = on_message
     client.connect('192.168.1.100', 1883, 60)
     client.loop_start()
-    #time.sleep(config.getint('intervals', 'readSensorEvery'))
     time.sleep(1)
     client.loop_stop()
-    #running sys cmds like kill, reboot, halt after loop_stop so that mqtt message gets consumed
-    if systemcmd:
-        systemfcts.set(systemcmd)
-        systemcmd = False
