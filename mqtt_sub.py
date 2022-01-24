@@ -31,10 +31,8 @@ def on_message(client, userdata, msg):
     # {'sensor': 'BME680', ...}
 
     msg_decode=str(msg.payload.decode("utf-8","ignore"))
-    print(">>> Command Received", msg_decode)
     try:
         msg_in=json.loads(msg_decode)
-        print(msg.topic)
 
         if msg.topic == 'growbed1/sensor':
             pass

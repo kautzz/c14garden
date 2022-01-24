@@ -16,7 +16,6 @@ config.read('settings.ini')
 client = mqtt.Client(config['mqtt']['pubcli'], False)
 
 class RelayBoard(object):
-    #__metaclass__ = IterRegistry
     _registry = []
 
     def __init__(self, device, pin, inverted):
@@ -66,9 +65,9 @@ class RelayBoard(object):
             self.deactivate()
         self.send()
 
-ch2 = RelayBoard("nc", 22, True)
 
 ch1 = RelayBoard("valve", 18, True)
+ch2 = RelayBoard("nc", 22, True)
 
 def setup():
     for channel in RelayBoard._registry:
@@ -88,12 +87,3 @@ def set(message):
         key = list(message.keys())[0]
         if channel.device == key:
             channel.set(message[key])
-
-    # if cmd['actuator'] == "ch1":
-    #     if cmd['active'] == True:
-    #         activate(valve1)
-    #     elif cmd['active'] == False:
-    #         deactivate(valve1)
-    #
-    # elif cmd['actuator']
-    pass
