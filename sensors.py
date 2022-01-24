@@ -78,8 +78,8 @@ class ADS(Sensor):
     def __init__(self, device):
         self.driver = ADS1x15.ADS1115(1)
         self.device = device
-        self.battery_voltage = 0
-        self.light_intensity = 0
+        self.battery_voltage = -99
+        self.light_intensity = -99
         super().__init__()
 
 
@@ -89,13 +89,13 @@ class ADS(Sensor):
         self.driver.setDataRate(7)
 
     def read(self):
-        self.battery_voltage = round(self.driver.toVoltage(self.driver.readADC_Differential_0_1()) * 2, 2), #multiply by 2 because of voltage divider
+        self.battery_voltage = round(self.driver.toVoltage(self.driver.readADC_Differential_0_1()) * 2, 2) #multiply by 2 because of voltage divider
         self.light_intensity = round((self.driver.toVoltage(self.driver.readADC_Differential_2_3())) / 0.033, 2) #divide by VCC to get percent
 
     def tojson(self):
         source = {
-            "sensor" : self.device,
-            "battery_voltage" : self.battery_voltage,
+            "sensor": self.device,
+            "battery_voltage": self.battery_voltage,
             "light_intensity": self.light_intensity
         }
         return(json.dumps(source))
@@ -106,9 +106,9 @@ class ISL(Sensor):
     def __init__(self, device):
         self.driver = smbus.SMBus(1)
         self.device = device
-        self.green = 0
-        self.red = 0
-        self.blue = 0
+        self.green = -99
+        self.red = -99
+        self.blue = -99
         super().__init__()
 
 
