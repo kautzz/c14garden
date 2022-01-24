@@ -65,13 +65,14 @@ class RelayBoard(object):
             try:
                 client.connect("192.168.1.100",1883,60)
                 client.publish("growbed1/actuators", self.tojson())
-                print(self.tojson())
                 client.disconnect()
 
             except Exception as e:
                 print(e)
 
             self.last_status = self.status
+        print(self.tojson())
+
 
     def set(self, status):
         if status == True:
