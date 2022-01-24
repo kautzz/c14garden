@@ -37,10 +37,10 @@ class BME(Sensor):
     def __init__(self, device):
         self.driver = bme680.BME680()
         self.device = device
-        self.temperature = 0
-        self.humidity = 0
-        self.pressure = 0
-        self.gas_resistance = 0
+        self.temperature = -99
+        self.humidity = -99
+        self.pressure = -99
+        self.gas_resistance = -99
         super().__init__()
 
 
@@ -63,12 +63,13 @@ class BME(Sensor):
 
     def tojson(self):
         source = {
-            "sensor" : self.device,
-            "temperature": self.temperature,
-            "humidity": self.humidity,
-            "pressure": self.pressure,
-            "gas_resistance": self.gas_resistance
+            "sensor" : self.device
         }
+        if self.temperature != -99: source["temperature"] = self.temperature
+        if self.humidity != -99: source["humidity"] = self.humidity
+        if self.pressure != -99: source["pressure"] = self.pressure
+        if self.gas_resistance != -99: source["gas_resistance"] = self.gas_resistance
+
         return(json.dumps(source))
 
 bme = BME("BME680")
