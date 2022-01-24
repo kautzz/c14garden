@@ -55,7 +55,8 @@ class RelayBoard(object):
         source = {
             self.device : self.status,
             "gpio": self.gpio,
-            "inv": self.inverted
+            "inv": self.inverted,
+            "schedule": self.schedule
         }
         return(json.dumps(source))
 
@@ -89,9 +90,10 @@ def update():
 def set(message):
     for channel in RelayBoard._registry:
         key = list(message.keys())[0]
-        print(key)
         if key == "schedule" and channel.device == message[key]:
-            print("schedule " + key + " match!" )
+            if message["duration"] and message["amount"]:
+                print("schedule " + key + " match!" )
+                channel.schedule.append(message)
 
         elif channel.device == key:
             channel.set(message[key])
