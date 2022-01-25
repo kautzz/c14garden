@@ -47,9 +47,9 @@ class RelayBoard(object):
 
     def check_schedule(self):
         day = datetime.today().strftime('%A').lower()
+        time = datetime.today().strftime('%H:%M').lower()
         for interval in self.schedule:
-            print(list(interval.keys())[0])
-            if list(interval.keys())[0] == day:
+            if list(interval.keys())[0] == day and interval[day] == time:
                 print("matching day")
 
     def read(self):
