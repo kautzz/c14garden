@@ -51,13 +51,13 @@ class RelayBoard(object):
         time = datetime.today().strftime('%H:%M')
         for interval in self.schedule:
 
-            if list(interval.keys())[0] == day and interval[day] in time:
+            if list(interval.keys())[0] == day and interval[day] == time:
                 if self.schedule_active == False:
                     self.schedule_active = True
                     self.activate()
 
-            elif (list(interval.keys())[0] == day
-                and interval[day] not in time
+            if (list(interval.keys())[0] == day
+                and interval[day] != time
                 and self.schedule_active == True):
                 self.schedule_active = False
                 self.deactivate()
