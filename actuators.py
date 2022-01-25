@@ -23,12 +23,12 @@ class RelayBoard(object):
         self._registry.append(self)
         self._pin = LED(pin)
         self.device = device
+        self.schedule = json.loads(config['schedule'][device])
         self.gpio = pin
         self.inverted = inverted
         self.status = False
         self.last_status = False
         self.deactivate()
-        self.schedule = json.loads(config['schedule'][device])
 
 
     def activate(self):
