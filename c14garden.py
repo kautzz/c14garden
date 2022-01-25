@@ -40,9 +40,9 @@ def main():
         while True:
             if config.getint('intervals', 'readSensorEvery') <= datetime.datetime.now().timestamp() - lastRead:
                 get_readings()
+                actuators.check_schedule()
                 lastRead = datetime.datetime.now().timestamp()
 
-            actuators.check_schedule()
             mqtt_sub.get_messages()
 
     except KeyboardInterrupt:
