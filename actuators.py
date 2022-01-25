@@ -52,10 +52,10 @@ class RelayBoard(object):
         for interval in self.schedule:
 
             if list(interval.keys())[0] == day and interval[day] == time:
-                if self.schedule_active = False:
+                if self.schedule_active == False:
                     self.schedule_active = True
                     self.activate()
-                elif self.schedule_active = True and interval[day] != time:
+                elif self.schedule_active == True and interval[day] != time:
                     self.schedule_active = False
                     self.deactivate()
 
