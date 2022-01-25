@@ -94,9 +94,12 @@ def set(message):
 
         if key == channel.device and message[key] == "schedule":
             if message["duration"] and message["amount"]:
-                print("▷ Adding interval to " + key + " schedule ...")
+                print("▶ Adding interval to " + key + " schedule ...")
                 del message[key]
                 channel.schedule.append(message)
+                config['schedule'][channel.device] = channel.schedule
+                with open('settings.ini', 'w') as configfile:
+                    config.write(configfile)
                 channel.last_status = 0
 
         elif key == channel.device and message[key] == "deschedule":
@@ -106,7 +109,7 @@ def set(message):
                     and message["duration"] == interval["duration"]
                     and message["amount"] == interval["amount"]):
 
-                    print("▷ Removing interval from " + key + " schedule ...")
+                    print("▶ Removing interval from " + key + " schedule ...")
                     channel.schedule.remove(interval)
 
             # if message["duration"] and message["amount"]:
