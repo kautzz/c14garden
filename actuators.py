@@ -24,6 +24,7 @@ class RelayBoard(object):
         self._pin = LED(pin)
         self.device = device
         self.schedule = json.loads(config['schedule'][device])
+        self.schedule_active = False
         self.gpio = pin
         self.inverted = inverted
         self.status = False
@@ -50,9 +51,12 @@ class RelayBoard(object):
         time = datetime.today().strftime('%H:%M')
         for interval in self.schedule:
 
-            if list(interval.keys())[0] == day and interval[day] == time:
-                print(time)
-                print(interval[day])
+            if (list(interval.keys())[0] == day
+                and interval[day] == time
+                and self.schedule_active == False):
+
+                self.schedule_active = True
+                self.activate()
 
     def read(self):
         if self.inverted: self.status = not self._pin.value
