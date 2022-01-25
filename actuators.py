@@ -94,13 +94,14 @@ def set(message):
 
         if key == channel.device and message[key] == "schedule":
             if message["duration"] and message["amount"]:
-                print("▶ Adding interval to " + key + " schedule ...")
                 del message[key]
                 channel.schedule.append(message)
                 config['schedule'][channel.device] = json.dumps(channel.schedule)
                 with open('settings.ini', 'w') as configfile:
                     config.write(configfile)
                 channel.last_status = 0
+                print("▶ Added interval to " + key + " schedule")
+
 
         elif key == channel.device and message[key] == "deschedule":
             day = list(message.keys())[1]
@@ -109,14 +110,14 @@ def set(message):
                     and message["duration"] == interval["duration"]
                     and message["amount"] == interval["amount"]):
 
-                    print("▶ Removing interval from " + key + " schedule ...")
                     channel.schedule.remove(interval)
+                    config['schedule'][channel.device] = json.dumps(channel.schedule)
+                    with open('settings.ini', 'w') as configfile:
+                        config.write(configfile)
+                    channel.last_status = 0
+                    print("▶ Removed interval from " + key + " schedule")
+                    break
 
-            # if message["duration"] and message["amount"]:
-            #     print("schedule " + key + " match!" )
-            #     del message[key]
-            #     channel.schedule.append(message)
-            #     channel.last_status = 0
 
         elif key == channel.device:
             channel.set(message[key])
