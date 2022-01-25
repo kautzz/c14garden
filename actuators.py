@@ -27,7 +27,7 @@ class RelayBoard(object):
         self.inverted = inverted
         self.status = False
         self.last_status = False
-        self.schedule = config['schedule'][device]
+        self.schedule = json.loads(config['schedule'][device])
         self.deactivate()
 
     def activate(self):
