@@ -45,6 +45,13 @@ class RelayBoard(object):
         self.read()
         self.send()
 
+    def check_schedule(self):
+        day = datetime.today().strftime('%A')
+        print(day)
+        for interval in self.schedule:
+            if interval.list(message.keys())[0] == day:
+                print("matching day")
+
     def read(self):
         if self.inverted: self.status = not self._pin.value
         else: self.status = self._pin.value
@@ -120,8 +127,5 @@ def set(message):
             channel.set(message[key])
 
 def check_schedule():
-    day = datetime.today().strftime('%A')
-    print(day)
-    for interval in self.schedule:
-        if interval.list(message.keys())[0] == day:
-            print("matching day")
+    for channel in RelayBoard._registry:
+        channel.check_schedule()
