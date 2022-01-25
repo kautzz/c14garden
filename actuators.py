@@ -94,7 +94,7 @@ def set(message):
 
         if key == channel.device and message[key] == "schedule":
             if message["duration"] and message["amount"]:
-                print("schedule " + key + " match!" )
+                print("▷ Adding interval to " + key + " schedule ...")
                 del message[key]
                 channel.schedule.append(message)
                 channel.last_status = 0
@@ -106,8 +106,8 @@ def set(message):
                     and message["duration"] == interval["duration"]
                     and message["amount"] == interval["amount"]):
 
-                    print("maaaaaatch!!!")
-                    remove(interval)
+                    print("▷ Removing interval from " + key + " schedule ...")
+                    channel.schedule.remove(interval)
 
             # if message["duration"] and message["amount"]:
             #     print("schedule " + key + " match!" )
