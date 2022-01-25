@@ -143,7 +143,7 @@ def set(message):
             channel.schedule = []
             with open('settings.ini', 'w') as configfile:
                 config.write(configfile)
-            channel.last_status = 0
+            channel.last_status = not channel.last_status
             channel.send()
 
 
