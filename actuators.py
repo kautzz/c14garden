@@ -140,6 +140,7 @@ def set(message):
 
         elif key == channel.device and message[key] == "deschedule_all":
             channel.schedule = []
+            config['schedule'][channel.device] = []
             with open('settings.ini', 'w') as configfile:
                 config.write(configfile)
             channel.last_status = not channel.last_status
