@@ -49,8 +49,10 @@ class RelayBoard(object):
         day = datetime.today().strftime('%A').lower()
         time = datetime.today().strftime('%H:%M')
         for interval in self.schedule:
-            if list(interval.keys())[0] == day and interval[day] == time:
-                print("matching day")
+
+            if list(interval.keys())[0] == day:
+                print(time)
+                print(interval[day])
 
     def read(self):
         if self.inverted: self.status = not self._pin.value
