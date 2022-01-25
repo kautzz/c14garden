@@ -50,7 +50,7 @@ class RelayBoard(object):
         time = datetime.today().strftime('%H:%M')
         for interval in self.schedule:
 
-            if list(interval.keys())[0] == day:
+            if list(interval.keys())[0] == day and interval[day] == time:
                 print(time)
                 print(interval[day])
 
