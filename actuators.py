@@ -117,6 +117,8 @@ def set(message):
                     channel.last_status = 0
                     print("▶ Removed interval from " + key + " schedule")
                     break
+                print("▶ Interval does not exist: " + message)
+
 
 
         elif key == channel.device:
