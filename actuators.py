@@ -97,7 +97,7 @@ def set(message):
                 print("▶ Adding interval to " + key + " schedule ...")
                 del message[key]
                 channel.schedule.append(message)
-                config['schedule'][channel.device] = channel.schedule
+                config['schedule'][channel.device] = json.dumps(channel.schedule)
                 with open('settings.ini', 'w') as configfile:
                     config.write(configfile)
                 channel.last_status = 0
