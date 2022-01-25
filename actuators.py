@@ -136,7 +136,6 @@ def set(message):
                     channel.last_status = not channel.last_status
                     print("▶ Removed interval from " + key + " schedule")
                     channel.send()
-                    break
                 print("▶ Interval does not exist: " + json.dumps(message))
 
         elif key == channel.device and message[key] == "deschedule_all":
@@ -144,8 +143,8 @@ def set(message):
             with open('settings.ini', 'w') as configfile:
                 config.write(configfile)
             channel.last_status = not channel.last_status
+            print("▶ Removed all intervals from " + key + " schedule")
             channel.send()
-
 
         elif key == channel.device:
             channel.set(message[key])
