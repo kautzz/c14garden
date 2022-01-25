@@ -55,9 +55,12 @@ class RelayBoard(object):
                 if self.schedule_active == False:
                     self.schedule_active = True
                     self.activate()
-                elif self.schedule_active == True and interval[day] != time:
-                    self.schedule_active = False
-                    self.deactivate()
+
+            elif (list(interval.keys())[0] == day
+                and interval[day] != time
+                and self.schedule_active == True):
+                self.schedule_active = False
+                self.deactivate()
 
     def read(self):
         if self.inverted: self.status = not self._pin.value
