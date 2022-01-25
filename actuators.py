@@ -27,8 +27,9 @@ class RelayBoard(object):
         self.inverted = inverted
         self.status = False
         self.last_status = False
-        self.schedule = json.loads(config['schedule'][device])
         self.deactivate()
+        self.schedule = json.loads(config['schedule'][device])
+
 
     def activate(self):
         if self.inverted: self._pin.off()
@@ -43,9 +44,6 @@ class RelayBoard(object):
         self.last_status = self.status
         self.read()
         self.send()
-
-    def set_schedule(self):
-        pass
 
     def read(self):
         if self.inverted: self.status = not self._pin.value
@@ -102,7 +100,6 @@ def set(message):
                 channel.last_status = 0
                 print("▶ Added interval to " + key + " schedule")
 
-
         elif key == channel.device and message[key] == "deschedule":
             day = list(message.keys())[1]
             for interval in channel.schedule:
@@ -118,8 +115,6 @@ def set(message):
                     print("▶ Removed interval from " + key + " schedule")
                     break
                 print("▶ Interval does not exist: " + json.dumps(message))
-
-
 
         elif key == channel.device:
             channel.set(message[key])

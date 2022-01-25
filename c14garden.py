@@ -42,6 +42,7 @@ def main():
                 get_readings()
                 lastRead = datetime.datetime.now().timestamp()
 
+            actuators.check_schedule()
             mqtt_sub.get_messages()
 
     except KeyboardInterrupt:
