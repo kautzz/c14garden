@@ -120,6 +120,7 @@ def set(message):
                     config.write(configfile)
                 channel.last_status = 0
                 print("▶ Added interval to " + key + " schedule")
+                channel.send()
 
         elif key == channel.device and message[key] == "deschedule":
             day = list(message.keys())[1]
@@ -134,6 +135,7 @@ def set(message):
                         config.write(configfile)
                     channel.last_status = 0
                     print("▶ Removed interval from " + key + " schedule")
+                    channel.send()
                     break
                 print("▶ Interval does not exist: " + json.dumps(message))
 
@@ -142,6 +144,7 @@ def set(message):
             with open('settings.ini', 'w') as configfile:
                 config.write(configfile)
             channel.last_status = 0
+            channel.send()
 
 
         elif key == channel.device:
