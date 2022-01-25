@@ -139,7 +139,7 @@ def set(message):
                 print("▶ Interval does not exist: " + json.dumps(message))
 
         elif key == channel.device and message[key] == "deschedule_all":
-            channel.schedule = []
+            channel.schedule.clear()
             config['schedule'][channel.device] = "[]"
             with open('settings.ini', 'w') as configfile:
                 config.write(configfile)
