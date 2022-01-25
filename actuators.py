@@ -118,7 +118,7 @@ def set(message):
                 config['schedule'][channel.device] = json.dumps(channel.schedule)
                 with open('settings.ini', 'w') as configfile:
                     config.write(configfile)
-                channel.last_status = 0
+                channel.last_status = not channel.last_status
                 print("▶ Added interval to " + key + " schedule")
                 channel.send()
 
@@ -133,7 +133,7 @@ def set(message):
                     config['schedule'][channel.device] = json.dumps(channel.schedule)
                     with open('settings.ini', 'w') as configfile:
                         config.write(configfile)
-                    channel.last_status = 0
+                    channel.last_status = not channel.last_status
                     print("▶ Removed interval from " + key + " schedule")
                     channel.send()
                     break
