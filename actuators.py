@@ -36,6 +36,7 @@ class RelayBoard(object):
         if self.inverted: self._pin.off()
         else: self._pin.on()
         self.last_status = self.status
+        self.schedule_active = False
         self.read()
         self.send()
 
@@ -43,6 +44,7 @@ class RelayBoard(object):
         if self.inverted: self._pin.on()
         else: self._pin.off()
         self.last_status = self.status
+        self.schedule_active = False
         self.read()
         self.send()
 
@@ -54,20 +56,17 @@ class RelayBoard(object):
             if (list(interval.keys())[0] == day
                 and interval[day] == time
                 and self.schedule_active == False):
-                self.schedule_active = True
                 self.schedule_start = datetime.today()
                 self.activate()
+                self.schedule_active = True
 
             elif (list(interval.keys())[0] == day
                 and self.schedule_start.strftime('%H:%M') == interval[day]
-
                 and self.schedule_start + timedelta(minutes=interval["duration"]) <= datetime.today()
-
                 and self.schedule_active == True):
-                self.schedule_active = False
                 self.deactivate()
 
-            else:
+            elif elf.schedule_start.strftime('%H:%M') == interval[day]:
                 print(str(self.schedule_start))
                 print(str(self.schedule_start + timedelta(minutes=interval["duration"])))
                 print(str(datetime.today()))
