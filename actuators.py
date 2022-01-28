@@ -61,14 +61,14 @@ class RelayBoard(object):
             elif (list(interval.keys())[0] == day
                 and self.schedule_start.strftime('%H:%M') == interval[day]
 
-                and self.schedule_start + datetime.timedelta(minutes=interval[duration]) <= datetime.today()
+                and self.schedule_start + timedelta(minutes=interval[duration]) <= datetime.today()
 
                 and self.schedule_active == True):
                 self.schedule_active = False
                 self.deactivate()
 
             else:
-                print(str(self.schedule_start + datetime.timedelta(minutes=interval[duration])))
+                print(str(self.schedule_start + timedelta(minutes=interval[duration])))
                 print(str(datetime.today()))
 
     def read(self):
