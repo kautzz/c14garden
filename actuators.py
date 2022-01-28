@@ -68,7 +68,7 @@ class RelayBoard(object):
                 self.deactivate()
 
             else:
-                print(str(self.schedule_start + timedelta(minutes=interval[duration])))
+                print(str(self.schedule_start + timedelta(minutes=interval["duration"])))
                 print(str(datetime.today()))
 
     def read(self):
