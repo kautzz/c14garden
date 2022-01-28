@@ -6,7 +6,7 @@ Garden automation, controlling actuators.
 
 from gpiozero import LED
 from time import sleep
-from datetime import datetime
+from datetime import datetime, timedelta
 import paho.mqtt.client as mqtt
 import json
 from configparser import ConfigParser
