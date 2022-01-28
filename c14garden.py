@@ -16,7 +16,7 @@ from configparser import ConfigParser
 config = ConfigParser()
 config.read('settings.ini')
 
-client = mqtt.Client(config['mqtt']['pubcli'], False)
+client = mqtt.Client(config['device']['name'] + "_pub", False)
 
 def get_readings():
     print("--------------------------------------")
