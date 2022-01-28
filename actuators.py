@@ -69,7 +69,7 @@ class RelayBoard(object):
                 and self.schedule_start + timedelta(minutes=interval["duration"]) <= datetime.today()):
                 self.deactivate()
 
-            elif self.schedule_active = True
+            elif self.schedule_active == True
                 and list(interval.keys())[0] == day
                 and self.schedule_start.strftime('%H:%M') == interval[day]:
                 print("▶▶▶ Schedule Active Until: " + str(self.schedule_start + timedelta(minutes=interval["duration"])))
