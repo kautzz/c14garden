@@ -25,13 +25,12 @@ class RelayBoard(object):
         self.device = device
         self.schedule = json.loads(config['schedule'][device])
         self.schedule_active = False
-        self.schedule_start = ""
+        self.schedule_start = datetime.now().time()
         self.gpio = pin
         self.inverted = inverted
         self.status = False
         self.last_status = False
         self.deactivate()
-
 
     def activate(self):
         if self.inverted: self._pin.off()
@@ -56,15 +55,21 @@ class RelayBoard(object):
                 and interval[day] == time
                 and self.schedule_active == False):
                 self.schedule_active = True
-                self.schedule_start = time
+                self.schedule_start = datetime.today()
                 self.activate()
 
             elif (list(interval.keys())[0] == day
-                and self.schedule_start == interval[day]
-                and interval[day] != time
+                and self.schedule_start.strftime('%H:%M') == interval[day]
+
+                and self.schedule_start + datetime.timedelta(minutes=interval[duration]) <= datetime.now().time()
+
                 and self.schedule_active == True):
                 self.schedule_active = False
                 self.deactivate()
+
+            else:
+                print(str(self.schedule_start + datetime.timedelta(minutes=interval[duration])))
+                print(str(datetime.now().time()))
 
     def read(self):
         if self.inverted: self.status = not self._pin.value
