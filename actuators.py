@@ -48,6 +48,8 @@ class RelayBoard(object):
         self.read()
         self.send()
 
+    # todo: add check_interval()
+
     def check_schedule(self):
         day = datetime.today().strftime('%A').lower()
         time = datetime.today().strftime('%H:%M')
@@ -60,18 +62,17 @@ class RelayBoard(object):
                 self.activate()
                 self.schedule_active = True
 
-            elif (list(interval.keys())[0] == day
+            # fixme: when schedule is active and the day of the week changes to a day NOT in the schedule, it will never turn off
+            elif (self.schedule_active == True
+                and list(interval.keys())[0] == day
                 and self.schedule_start.strftime('%H:%M') == interval[day]
-                and self.schedule_start + timedelta(minutes=interval["duration"]) <= datetime.today()
-                and self.schedule_active == True):
+                and self.schedule_start + timedelta(minutes=interval["duration"]) <= datetime.today()):
                 self.deactivate()
 
-            elif self.schedule_start.strftime('%H:%M') == interval[day]:
-                print(str(self.schedule_start))
-                print(str(self.schedule_start + timedelta(minutes=interval["duration"])))
-                print(str(datetime.today()))
-
-            print(self.schedule_active)
+            elif self.schedule_active = True
+                and list(interval.keys())[0] == day
+                and self.schedule_start.strftime('%H:%M') == interval[day]:
+                print("▶▶▶ Schedule Active Until: " + str(self.schedule_start + timedelta(minutes=interval["duration"])))
 
     def read(self):
         if self.inverted: self.status = not self._pin.value
