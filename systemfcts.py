@@ -18,21 +18,21 @@ client = mqtt.Client(config['mqtt']['pubcli'], False)
 def set(cmd):
     if cmd['system'] == "reboot":
         client.connect("192.168.1.100",1883,60)
-        client.publish("growbed1/system", '{"sysmsg": "reboot"}')
+        client.publish(config['device']['name'] + "/system", '{"sysmsg": "reboot"}')
         client.disconnect()
         print("Rebooting Now!")
         os.system("sleep 3 && sudo reboot &")
 
     elif cmd['system'] == "halt":
         client.connect("192.168.1.100",1883,60)
-        client.publish("growbed1/system", '{"sysmsg": "halt"}')
+        client.publish(config['device']['name'] + "/system", '{"sysmsg": "halt"}')
         client.disconnect()
         print("Halting Now!")
         os.system("sleep 3 && sudo halt &")
 
     if cmd['system'] == "kill":
         client.connect("192.168.1.100",1883,60)
-        client.publish("growbed1/system", '{"sysmsg": "kill"}')
+        client.publish(config['device']['name'] + "/system", '{"sysmsg": "kill"}')
         client.disconnect()
         print("Killing Myself!")
         os.system("sleep 3 && killall python3 &")

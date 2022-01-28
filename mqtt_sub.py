@@ -18,9 +18,9 @@ client = mqtt.Client(config['mqtt']['subcli'], False)
 # The callback for when the client connects to the broker
 def on_connect(client, userdata, flags, rc):
     client.subscribe([
-            ("growbed1/system/set", 1),
-            ("growbed1/sensors/set", 1),
-            ("growbed1/actuators/set", 1)
+            (config['device']['name'] + "/system/set", 1),
+            (config['device']['name'] + "/sensors/set", 1),
+            (config['device']['name'] + "/actuators/set", 1)
         ])
 
 def on_message(client, userdata, msg):
@@ -28,13 +28,13 @@ def on_message(client, userdata, msg):
     try:
         msg_in=json.loads(msg_decode)
 
-        if msg.topic == 'growbed1/sensors/set':
+        if msg.topic == config['device']['name'] + "/sensors/set":
             pass
 
-        elif msg.topic == 'growbed1/actuators/set':
+        elif msg.topic == config['device']['name'] + "/actuators/set":
             actuators.set(msg_in)
 
-        elif msg.topic == "growbed1/system/set":
+        elif msg.topic == config['device']['name'] + "/system/set":
             systemfcts.set(msg_in)
 
     except Exception as e:
