@@ -6,8 +6,7 @@ Garden automation, controlling actuators.
 
 from gpiozero import LED
 from time import sleep
-#from datetime import datetime, timedelta
-import datetime
+from datetime import datetime, timedelta
 import paho.mqtt.client as mqtt
 import json
 from configparser import ConfigParser
@@ -26,7 +25,7 @@ class RelayBoard(object):
         self.device = device
         self.schedule = json.loads(config['schedule'][device])
         self.schedule_active = False
-        self.schedule_start = datetime.now().time()
+        self.schedule_start = datetime.today()
         self.gpio = pin
         self.inverted = inverted
         self.status = False
@@ -62,7 +61,7 @@ class RelayBoard(object):
             elif (list(interval.keys())[0] == day
                 and self.schedule_start.strftime('%H:%M') == interval[day]
 
-                and self.schedule_start + datetime.timedelta(minutes=interval[duration]) <= datetime.now().time()
+                and self.schedule_start + datetime.timedelta(minutes=interval[duration]) <= datetime.today()
 
                 and self.schedule_active == True):
                 self.schedule_active = False
@@ -70,7 +69,7 @@ class RelayBoard(object):
 
             else:
                 print(str(self.schedule_start + datetime.timedelta(minutes=interval[duration])))
-                print(str(datetime.now().time()))
+                print(str(datetime.today()))
 
     def read(self):
         if self.inverted: self.status = not self._pin.value
