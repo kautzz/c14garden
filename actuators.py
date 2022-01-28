@@ -70,6 +70,7 @@ class RelayBoard(object):
                 print(str(self.schedule_start))
                 print(str(self.schedule_start + timedelta(minutes=interval["duration"])))
                 print(str(datetime.today()))
+                print(self.schedule_active)
 
     def read(self):
         if self.inverted: self.status = not self._pin.value
