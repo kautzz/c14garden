@@ -30,7 +30,7 @@ def main():
 
     try:
         client.connect("192.168.1.100",1883,60)
-        client.publish("growbed1/system", '{"sysmsg": "script start"}')
+        client.publish(config['device']['name'] + "/system", '{"sysmsg": "script start"}')
         client.disconnect()
 
     except Exception as e:
