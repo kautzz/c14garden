@@ -62,3 +62,11 @@ WIP
   "system": "reboot",
 }
 ```
+
+## autostart & deamon inside tmux session
+
+add the following to crontab -e
+
+```
+@reboot sh /home/pi/c14garden/tmux_wrapper.sh
+```
