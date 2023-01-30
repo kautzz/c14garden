@@ -12,7 +12,7 @@ import json
 from configparser import ConfigParser
 
 config = ConfigParser()
-config.read('settings.ini')
+config.read('/home/pi/c14garden/settings.ini')
 
 client = mqtt.Client(config['device']['name'] + "_pub", False)
 
