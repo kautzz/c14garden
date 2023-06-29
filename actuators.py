@@ -124,7 +124,7 @@ def set(message):
                 del message[key]
                 channel.schedule.append(message)
                 config['schedule'][channel.device] = json.dumps(channel.schedule)
-                with open('settings.ini', 'w') as configfile:
+                with open('/home/pi/c14garden/settings.ini', 'w') as configfile:
                     config.write(configfile)
                 channel.last_status = not channel.last_status
                 print("▶▶▶ Added interval to " + key + " schedule")
@@ -139,7 +139,7 @@ def set(message):
 
                     channel.schedule.remove(interval)
                     config['schedule'][channel.device] = json.dumps(channel.schedule)
-                    with open('settings.ini', 'w') as configfile:
+                    with open('/home/pi/c14garden/settings.ini', 'w') as configfile:
                         config.write(configfile)
                     channel.last_status = not channel.last_status
                     print("▶▶▶ Removed interval from " + key + " schedule")
@@ -149,7 +149,7 @@ def set(message):
         elif key == channel.device and message[key] == "deschedule_all":
             channel.schedule.clear()
             config['schedule'][channel.device] = "[]"
-            with open('settings.ini', 'w') as configfile:
+            with open('/home/pi/c14garden/settings.ini', 'w') as configfile:
                 config.write(configfile)
             channel.last_status = not channel.last_status
             print("▶▶▶ Removed all intervals from " + key + " schedule")
